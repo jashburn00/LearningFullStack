@@ -3,6 +3,7 @@
 ## Contents
 <!-- no toc -->
 - [Main Structure of HTML Pages](#mainstructure)
+- [High Level and Overview Info](#highlevel)
 - [Browser Events](#browser-events)
 - [List of Common Elements](#commonelements)
 
@@ -14,6 +15,9 @@
   - __body__
     - content must be rendered inside the body tag (though some browsers still render elements outside it, it is considered bad practice)
     - typically used for the visible content of a webpage
+
+## <a id="highlevel">High Level & Overview Info</a>
+- references between pages are assuming of the typical root directory structure
 
 ## <a id="browser-events">Browser Events</a>
 - onmouseover (mouse near an HTML element)
@@ -41,3 +45,7 @@
   - text between tags is displayed if video is unable to load
   - ex: < video src="mymovie.mp4" width="240" height="160" controls> Video not found. < /video >
 - __anchors/links (a)__ uses *href* attribute and uses display text
+  - uses the *target* attribute to specify opening in new tab/window (_blank) or ...
+  - other elements can be wrapped in an anchor element to use photo links, etc.
+    - in the case of __li__, only wrap the innermost text
+  - can target an element on the same page by using the *id* property of the target element, prefixed with a "#" (e.g. href="#mydiv")
