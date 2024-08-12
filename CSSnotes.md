@@ -3,6 +3,7 @@
 <!-- no toc -->
 - [How to apply styles](#how-to-apply-styles)
 - [Visual Rules](#visual-rules)
+- [Box Model](#box-model)
 
 ## How to apply styles
 - two main ways to apply styles to an element:
@@ -29,6 +30,9 @@
   > h1.boldclass { ...
   - *descendant* elements can be selected by adding an element type after the first selection (this targets child elements of the first selected element)
     > .main-list li { ...
+- the *!important* suffix can be added to an attribute to override any other style, regardless of specificity.
+  > color: red !important;
+  - this should be avoided unless absolutely necessary.
 
 ### Pseudo Classes
 Elements can be in different states (hover, visited, disabled, active) and can be selected differently based on their state.
@@ -55,3 +59,10 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   > background-image: url('https://someurl/image.jpg');
   <br> background-image: url('images/mypicture.jpg');
  
+## Box Model
+- shorthand can be used for margins and padding
+  - 1 value: all sides
+  - 2 values: top/bottom sides
+  - 3 values: top sides bottom
+  - 4 values: top right bottom left (clockwise)
+- 
