@@ -58,11 +58,19 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - the *background-image* property uses the following syntax: 
   > background-image: url('https://someurl/image.jpg');
   <br> background-image: url('images/mypicture.jpg');
- 
+- *overflow* is awesome (scroll, hidden, visible)
+- *visibility* (hidden, visible, collapse)
+  - not to be confused with *display*, where setting *display: none;* will entirely remove the element while *visibility: hidden;* will leave an empty space where the element goes, and only hide the content of that element.
 ## Box Model
 - shorthand can be used for margins and padding
   - 1 value: all sides
   - 2 values: top/bottom sides
   - 3 values: top sides bottom
   - 4 values: top right bottom left (clockwise)
-- 
+- the margin property can be used to center content in its parent element like so:
+  > margin: 0 auto;
+  - this is shorthand for 0 top/bottom margins and auto for the left/right margins
+- min/max width/height are best used to limit resizing for screens of different sizes
+### margin collapse
+- collapsing is the ignoring of the smaller of two adjacent margins
+- top/bottom margins collapse, while horizontal margins do not
