@@ -71,6 +71,10 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   > margin: 0 auto;
   - this is shorthand for 0 top/bottom margins and auto for the left/right margins
 - min/max width/height are best used to limit resizing for screens of different sizes
+- default HTML adds padding and border to the width/height, making the real dimensions of a box hard to predict (*content-box*)
+  - you can set all elements to use the *box-sizing: border-box;* rule 
+  > \* { box-sizing: border-box;
+  - this rule keeps height and width fixed, and fits the padding and borders into the specified width/height
 ### margin collapse
 - collapsing is the ignoring of the smaller of two adjacent margins
 - top/bottom margins collapse, while horizontal margins do not
