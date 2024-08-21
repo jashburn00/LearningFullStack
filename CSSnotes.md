@@ -75,6 +75,11 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - you can set all elements to use the *box-sizing: border-box;* rule 
   > \* { box-sizing: border-box;
   - this rule keeps height and width fixed, and fits the padding and borders into the specified width/height
+- __block elements__ take up the entire width of their containing element
+  - they also prevent other elements from appearing in the same horizontal space
+  - default position is left
+    - position can be changed with the *position* property:
+      - 
 ### margin collapse
 - collapsing is the ignoring of the smaller of two adjacent margins
 - top/bottom margins collapse, while horizontal margins do not
