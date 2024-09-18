@@ -79,7 +79,31 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - they also prevent other elements from appearing in the same horizontal space
   - default position is left
     - position can be changed with the *position* property:
-      - 
+      - static (default, no need to specify)
+      - relative (to its default static position)
+      - fixed (stays in position regardless of scrolling; often used for nav bars; removes element from flow of page)
+      - absolute (other elements ignore it; positioned relative to nearest parent element)
+      - sticky (sticks to part of the page as page gets scrolled)
+  - positions can be moved using *top, bottom, left, or right* (separate attributes)
+    - each specified amount of pixels moves the element away from the specified side of the box
+- *z-index*: ```z-index: 25;```
+  - default is 0
+  - does not work with static elements
 ### margin collapse
 - collapsing is the ignoring of the smaller of two adjacent margins
 - top/bottom margins collapse, while horizontal margins do not
+### display values
+- inline: box is only big enough for the content, does not require new lines before/after
+  - height/width cannot be specified in CSS
+- inline-block: combines other two
+  - height and width can be specified
+  - 
+- block: takes up the entire width of containing element
+  - default setting for divs, headers, footers, h
+  - width can be specified in CSS
+### float
+- used for moving an element inside of its containing element (far left or far right)
+- commonly used for wrapping text around an image
+- float elements must have width specified 
+- *clear* property is used to handle collisions between float elements
+  - the values (left, right, both, none), they indicate if the element should render on a new line when they are overlapped by a float element to the (left right or both).  
