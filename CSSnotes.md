@@ -107,3 +107,12 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - float elements must have width specified 
 - *clear* property is used to handle collisions between float elements
   - the values (left, right, both, none), they indicate if the element should render on a new line when they are overlapped by a float element to the (left right or both).  
+
+## Fonts
+- *font-family* accepts a single value or a stack of fonts to be used as backups
+  - e.g. ```font-family: Consolas, 'Courier New', monospace;```
+- *font weight* accepts either a text value (bold, normal, lighter, bolder) or an integer value (1-1000), usually in increments of 100
+  - __normal__ = 400
+  - __bold__ = 700
+  - *not all fonts can be assigned a numeric font weight*
+- *font-style* includes italic, normal (default)
