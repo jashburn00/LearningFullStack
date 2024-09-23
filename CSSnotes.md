@@ -116,3 +116,5 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - __bold__ = 700
   - *not all fonts can be assigned a numeric font weight*
 - *font-style* includes italic, normal (default)
+- *font-transform* can be used to syle all text characters (uppercase or lowercase)
+- *letter-spacing* can be given a pixels value (or em)
