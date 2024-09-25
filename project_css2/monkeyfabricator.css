@@ -1,0 +1,99 @@
+:root {
+    --pink: #ff00c1;
+    --cyan: #00fff9;
+    --blue: #4900ff;
+    --purple: #9600ff;
+    --teal: #00b8ff;
+    /*to use: var(--blue)*/
+}
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body{
+    background-color: black;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.titlesection{
+    border: 2px solid white;
+    display: block;
+    text-align: center;
+    margin-left: -10%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    box-shadow: 
+        0 0 10px var(--purple),
+        0 0 20px var(--pink),
+        0 0 40px var(--teal);
+    padding: 20px;
+    width: 120%;
+}
+
+.titlesection p{
+    font-size: 20px;
+    font-family: "Industrial Schizophrenic";
+}
+
+.titlesection h1{
+    font-family: "Industrial Schizophrenic";
+}
+
+.titlesection a{
+    font-family: "Industrial Schizophrenic";
+}
+
+a{
+    color: var(--cyan);
+}
+
+.tips h2{
+    text-align: center;
+}
+
+table {
+    box-shadow: 
+        0 0 8px var(--purple), 
+        0 0 20px var(--blue),
+        0 0 35px var(--teal);
+    width: 90%;
+    margin: 25px auto;
+    table-layout: fixed;
+}
+
+tr{
+    box-shadow:
+        /* inset 0 0 10px #fff, */
+        inset 0 0 10px var(--purple),
+        inset 0 0 20px var(--cyan),
+        inset 0 0 40px var(--blue);
+}
+
+.tablecontent{
+    color: black;
+}
+
+th {
+    box-shadow: 
+        inset -30px 0 50px  var(--pink),
+        inset 30px 0 50px var(--cyan);
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    background-color: #fff;
+}
+
+td{
+    box-shadow: 
+        inset 0 0 6px var(--blue),
+        inset 0 0 12px var(--cyan),
+        inset 0 0 28px var(--pink);
+    text-align: center;
+    font-weight: bold;
+}
+

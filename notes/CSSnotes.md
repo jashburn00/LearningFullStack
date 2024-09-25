@@ -4,6 +4,7 @@
 - [How to apply styles](#how-to-apply-styles)
 - [Visual Rules](#visual-rules)
 - [Box Model](#box-model)
+- [Text & Fonts](#text-and-fonts)
 
 ## How to apply styles
 - two main ways to apply styles to an element:
@@ -108,7 +109,7 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - *clear* property is used to handle collisions between float elements
   - the values (left, right, both, none), they indicate if the element should render on a new line when they are overlapped by a float element to the (left right or both).  
 
-## Fonts
+## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
   - e.g. ```font-family: Consolas, 'Courier New', monospace;```
 - *font weight* accepts either a text value (bold, normal, lighter, bolder) or an integer value (1-1000), usually in increments of 100
@@ -117,4 +118,17 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - *not all fonts can be assigned a numeric font weight*
 - *font-style* includes italic, normal (default)
 - *font-transform* can be used to syle all text characters (uppercase or lowercase)
-- *letter-spacing* can be given a pixels value (or em)
+- both *letter-spacing* and *word-spacing* can be given a pixels value or em value
+- font size (em), line leading, and line height breakdown:![whoops](./../notesImages/image.png)
+  - *line-height* can be given a unitless value, which will make it depend on font size.
+- *text-align* can be assigned justify, right, or left (left is default)
+
+### Including other fonts 
+- two approaches:
+  - host the font with your website
+    - download them into one of the file formats listed (OTF, TTF, WOFF, WOFF2) and add it to your project
+    - create a `@font-face` rule in your CSS file 
+      - use the *font-family* property to specify the name of the font
+      - the *src* attribute is given comma-separated pairs of a `url()` and `format()` value
+  - use a `<link>` element 
+    - this can be done in the head of the html file or in the CSS file using `@import url('')`
