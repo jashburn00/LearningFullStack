@@ -5,6 +5,8 @@
 - [Visual Rules](#visual-rules)
 - [Box Model](#box-model)
 - [Text & Fonts](#text-and-fonts)
+- [Accesibility Practices](#accessibility-practices)
+- [Wireframing](#wireframing)
 
 ## How to apply styles
 - two main ways to apply styles to an element:
@@ -132,3 +134,40 @@ Elements can be in different states (hover, visited, disabled, active) and can b
       - the *src* attribute is given comma-separated pairs of a `url()` and `format()` value
   - use a `<link>` element 
     - this can be done in the head of the html file or in the CSS file using `@import url('')`
+
+## Accessibility practices
+- `<a>` elements
+  - use some way to distinguish them from other text 
+  - hover effects should not be used as a panacea, since they cannot be noticed immediately and are not available on mobile browsers
+- *title* can be used to give tooltips when hovering an element 
+- four state pseudoclasses (in order):
+  - `:link`
+  - `:visited`
+  - `:hover`
+  - `:active`
+- Skeumorphism (making things imitate real life counterparts) can lower user learning curve
+- flat design (making UI simpler and cleaner) banks on users being familiar with digital UI and not needing skeumorphism
+
+### UX patterns
+- __affordances__ consist of what type of interaction users can do with an object. (e.g. bench can be sat on)
+- __signifiers__ are features that advertise affordances to users (e.g. handle on teacup) 
+
+### Breadcrumbs
+- commonly uses ul/li elements
+  - using the `+` (adjacent sibling combinator) lets us select two adjacent elements who share a common parent
+  - ex: `.breadcrumb li+li::before { content: ">"; }` will result in the ">" between elements.
+    - you can specify to only use it between certain types/classes of elements: `.breadcrumb li.location+li.location::before{ content: ">"; }` or after certain types like this: `. breadcrumb .attribute::after{ content: "x"; vertical-align: super; }`
+- must be manually created for each page unless you are the true wizard king
+- three types of breadcrumbs:
+  - location (where you are in the site)
+  - attribute (specification used after a location-based breadcrumb)
+    - sometimes removable with "x" button
+  - path (follows user's unique path of all breadcrumbs)
+    - gets complicated and can be abbreviated with a "..." breadcrumb
+- breadcrumbs may confuse users if they behave differently than expected
+- not recommended to have them as the only navigation structure
+
+## Wireframing
+- similar to an architecture blueprint
+- often made for structure, and don't specify color or other aesthetics
+- created before mockups or specific design sketches
