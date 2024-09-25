@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Abnes";
+    src: url("abnes.ttf");
+}
+
+::root{
+    --blue: #4900ff;
+    --purple: #9600ff;
+    --red: #c13;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: 'Abnes', courier, monospace;
+    background-color: black;
+    color: lightgray;
+}
+

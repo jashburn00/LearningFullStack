@@ -171,3 +171,11 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - similar to an architecture blueprint
 - often made for structure, and don't specify color or other aesthetics
 - created before mockups or specific design sketches
+
+### from design to website
+- after designs are laid out, sometimes you can hit a wall
+- think of the sections on pages as using a grid layout
+- visual cohesion & continuity
+  - make a style guide before building it all 
+  - maintain colors and styles, aka dont be stupid
+- stay open to change as you build 
