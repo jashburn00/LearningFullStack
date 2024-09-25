@@ -17,7 +17,10 @@
         <h2>Shadows use five values separated by spaces. The third and fourth are optional,
              and default to 0. There is also an optional prefix called "inset", which makes the 
              shadow effect appear inside the element. Therefore, you can declare
-              a shadow attribute with 5, 3, 6, or 4 values.</h2>
+              a shadow attribute with 5, 3, 6, or 4 values. If you omit the spread
+            size and include the shadow size there are even more permutations, but
+            I can't be bothered to add them.
+        </h2>
     </div>
 
     <table>
@@ -105,5 +108,12 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="tips">
+        <h2>But what the hell is spread size?<br>Spread size determines at which
+        point the shadow becomes thinner. If omitted, the shadow will not thin
+        out until the end of the shadow length.
+        </h2>
+    </div>
 </body>
 </html>
