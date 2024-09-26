@@ -5,7 +5,10 @@
 </head>
 <body>
     <nav>
-        <a href="#" class="navbtn">GitHub</a>
+        <a href="#" class="navbtn">I</a>
+        <a href="#" class="navbtn">chew</a>
+        <a href="#" class="navbtn">on</a>
+        <a href="#" class="navbtn">stinky</a>
         <a href="#" class="navbtn">Socks</a>
         <img class="logo" src="./logo-transparent.png">
     </nav>
@@ -15,7 +18,7 @@
         <h2>a dope ass style guide</h2>
     </div>
 
-    <div class="section">
+    <div class="section white">
         <h2>Colors</h2>
         <p>
             The colors in this style guide are inspired by space exploration,
@@ -23,9 +26,7 @@
             prominent color for visual effects should be red, white for readability, 
             and black for backgrounds to make the other colors stand out. The gray 
             color, while included, is used mainly for linear gradients to give life 
-            to the headers. The headers use a font called "Abnes", and its creator 
-            is kind enough to let us use it without a license as long as it is not 
-            used for profit.
+            to the headers. 
         </p>
         <div class="media white" style="background-color: var(--whiteEon); height: 540px; width: 17%;">
             <div class="caption">
@@ -64,7 +65,29 @@
         </div>
     </div>
 
-    <div class="section">
+    <div class="section red" id="fonts">
+        <h2>Fonts</h2>
+        <p style="display: inline;">The font family used is: </p>
+        <h4 style="display: inline;">Abnes, </h4>
+        <p style="padding: 1px; display: inline; font-family: 'Verdana';">Verdana,</p>
+        <p style="padding: 0px; display: inline; font-family: sans-serif;">and plain old sans serif.</p>
+        
+        <p style="margin-top: 30px;">
+            The headers use a font called "Abnes", and its creator 
+            is kind enough to let us use it without a license as long as it is not 
+            used for profit. The Abnes font screams "LASERS" (and space exploration), and is perfect 
+            for this style. However, since it does not have great readability, it is used 
+            solely for headers. Another thing to note about the use of Abnes in this style guide is 
+            that we use a linear gradient CSS trick to add some life to the letters, rather than declaring
+            a text color.<br><br> Verdana is a much more readable font, and is used for paragraphs.
+            Verdana is not only a web safe font, but it is among the most legible. Thanks to its plain, clean 
+            type void of serif, it is very to-the-point and fits well with a theme of space exploration.
+            <br><br>Finally, we rely on plain sans-serif if all else fails; plain sans-serif font is very similar
+            to Verdana and provides much of the same appeal.
+        </p>
+    </div>
+
+    <div class="section white">
         <h2>Shadow / glow classes</h2>
         <p>
             To add a shadow/glow effect to any element, add the class value 
@@ -120,7 +143,7 @@
         </div>
     </div>
 
-    <div class="section">
+    <div class="section red">
         <h2>Navbar and Buttons</h2>
         <p>
             The navbar is stuck to the top of the screen for accessibility.
@@ -143,13 +166,25 @@
         <a class="btn">I am a btn</a>
     </div>
 
-    <div class="section">
-        <h2>Media</h2>
-        <p>
-            The media containers used in this style guide do not inherently
-            use a shadow effect. Rather, they are intended to use whichever
-            glow class they want for each instance.  
-        </p>
+    <div class="section white" id="mediacontainers">
+        <h2>Media Containers</h2>
+        <div style="display: flex; width: 98%; justify-content: space-between;">
+            <p style="margin-left: 15px; flex-grow: 1;">
+                The media containers used in this style guide do not inherently
+                use a shadow effect. Rather, they are intended to use whichever
+                glow class they want for each instance.<br><br> There are also captions 
+                to be used with the media containers, under the class "caption".
+                The captions are intended to hold several smaller elements and 
+                by default are set to be in the bottom-right corner of their 
+                container.<br><br>The media containers are meant to be styled individually, 
+                rather than making them more suited to any one type of media. 
+            </p>
+            <div class="media white" style="background-image: url('./hubble.jpg'); height: 350px; min-width: 550px;">
+                <div class="caption">
+                    <p>The Hubble</p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
