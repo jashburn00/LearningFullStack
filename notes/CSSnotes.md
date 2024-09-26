@@ -111,6 +111,30 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - *clear* property is used to handle collisions between float elements
   - the values (left, right, both, none), they indicate if the element should render on a new line when they are overlapped by a float element to the (left right or both).  
 
+### flexbox
+- two main components:
+  - flex containers
+    - any element that contains flex items
+    - useful for handling changes in screen size
+    - created with the attribute `display: flex;` or `display: inline-flex;`
+      - inline-flex lets us create a flexbox that is an inline element instead of a block element
+    - flex elements take up their entire line width, similar to block elements.
+    - uses other properties to specify how its children behave:
+      - *justify-content*
+      - *align-items*
+      - *flex-grow*
+      - *flex-shrink*
+      - *flex-basis*
+      - *flex*
+      - *flex-wrap*
+      - *align-content*
+      - *flex-direction*
+      - *flex-flow*
+  - flex items
+    - children of flex containers
+    - do not begin on new lines
+    - 
+
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
   - e.g. ```font-family: Consolas, 'Courier New', monospace;```

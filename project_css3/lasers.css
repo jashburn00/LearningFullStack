@@ -157,30 +157,30 @@ p{
 .purple{
     border: none;
     box-shadow:
-        0 0 10px 8px var(--purpleHeat);
+        0 0 14px 10px var(--purpleHeat);
 }
 
 .blue{
     border: none;
     box-shadow:
-        0 0 10px 8px var(--blueIntensity);
+        0 0 14px 10px var(--blueIntensity);
 }
 
 .red{
     border: none;
     box-shadow:
-        0 0 10px 8px var(--redLaser);
+        0 0 16px 12px var(--redLaser);
 }
 
 .gray{
     border: none;
     box-shadow:
-        0 0 10px 8px var(--grayMachine);
+        0 0 14px 10px var(--grayMachine);
 }
 
 .white{
     border: none;
     box-shadow:
-        0 0 10px 8px var(--whiteEon);
+        0 0 14px 10px var(--whiteEon);
 }
 

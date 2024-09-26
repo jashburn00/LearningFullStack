@@ -44,3 +44,16 @@ table structure:
   - search engine optimization
   - accessibility
   - readability
+
+## Layouts (Grid)
+- grid layout is comprised of columns and rows evenly spanning across the page
+  - commonly 12, 16, or 3 cols
+  - rows can be used to force content away from empty space 
+  - responsive grids are needed to handle the 
+- gutters are the negative space between columns
+  - no content is allowed in gutters unless it is using both adjacent columns
+  - gutters should be much smaller than columns or rows
+- margins on either side of the design (leftmost and rightmost cols?)
+- whitespace
+  - passive/micro whitespace: improves aesthetics without guiding users
+  - active/macro whitespace: done intentionally to emphasize content or guide users
