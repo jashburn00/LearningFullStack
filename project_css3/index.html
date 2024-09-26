@@ -4,7 +4,154 @@
     <link rel="stylesheet" href="lasers.css">
 </head>
 <body>
-    <h1>LASERS</h1>
+    <nav>
+        <a href="#" class="navbtn">GitHub</a>
+        <a href="#" class="navbtn">Socks</a>
+        <img class="logo" src="./logo-transparent.png">
+    </nav>
+
+    <div class="titlebar">
+        <h1>LASERS</h1>
+        <h2>a dope ass style guide</h2>
+    </div>
+
+    <div class="section">
+        <h2>Colors</h2>
+        <p>
+            The colors in this style guide are inspired by space exploration,
+            in case you couldn't tell. With the theme of "Lasers", the most 
+            prominent color for visual effects should be red, white for readability, 
+            and black for backgrounds to make the other colors stand out. The gray 
+            color, while included, is used mainly for linear gradients to give life 
+            to the headers. The headers use a font called "Abnes", and its creator 
+            is kind enough to let us use it without a license as long as it is not 
+            used for profit.
+        </p>
+        <div class="media white" style="background-color: var(--whiteEon); height: 540px; width: 17%;">
+            <div class="caption">
+                <h4>White Eon</h4>
+                <p>#DDDDDD</p>
+                <p>RGB(221,221,221)</p>
+            </div>
+        </div>
+        <div class="media red" style="background-color: var(--redLaser); height: 540px; width: 17%;">
+            <div class="caption">
+                <h4>Red Laser</h4>
+                <p>#C30000</p>
+                <p>RGB(195,0,0)</p>
+            </div>
+        </div>
+        <div class="media blue" style="background-color: var(--blueIntensity); height: 540px; width: 17%;">
+            <div class="caption">
+                <h4>Blue Intensity</h4>
+                <p>#4900FF</p>
+                <p>RGB(73,0,255)</p>
+            </div>
+        </div>
+        <div class="media purple" style="background-color: var(--purpleHeat); height: 540px; width: 17%;">
+            <div class="caption">
+                <h4>Purple Heat</h4>
+                <p>#9600FF</p>
+                <p>RGB(150,0,255)</p>
+            </div>
+        </div>
+        <div class="media gray" style="background-color: var(--grayMachine); height: 540px; width: 17%;">
+            <div class="caption">
+                <h4>Gray Machine</h4>
+                <p>#313030</p>
+                <p>RGB(49,48,48)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Shadow / glow classes</h2>
+        <p>
+            To add a shadow/glow effect to any element, add the class value 
+            named with the desired color. There is one class for each of the
+            colors displayed above.
+        </p>
+        <div class="media white" style="width: 200px; height: 200px;">
+            <div class="caption">
+                <h4>White</h4>
+                <p>class "white"</p>
+            </div>
+        </div>
+        <div class="media red" style="width: 200px; height: 200px;">
+            <div class="caption">
+                <h4>Red</h4>
+                <p>class "red"</p>
+            </div>
+        </div>
+        <div class="media blue" style="width: 200px; height: 200px;">
+            <div class="caption">
+                <h4>Blue</h4>
+                <p>class "blue"</p>
+            </div>
+        </div>
+        <div class="media purple" style="width: 200px; height: 200px;">
+            <div class="caption">
+                <h4>Purple</h4>
+                <p>class "purple"</p>
+            </div>
+        </div>
+        <div class="media gray" style="width: 200px; height: 200px;">
+            <div class="caption">
+                <h4>Gray</h4>
+                <p>class "gray"</p>
+            </div>
+        </div>
+
+        <p>
+            The shadow effects are intended to be the main source of visual
+            appeal when juxtaposed with a lack of other definitive shapes and 
+            lines. The simple yet vibrant aesthetic of the glow is destroyed by too many other 
+            strong colors and colored elements. 
+        </p>
+        <div class="media red" style="width: 350px; height: 200px; background-color: var(--purpleHeat);">
+            <div class="caption">
+                <p>This looks tacky. Don't do this.</p>
+            </div>
+        </div>
+        <div class="media red" style="width: 350px; height: 200px;">
+            <div class="caption">
+                <p>This looks much cleaner.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Navbar and Buttons</h2>
+        <p>
+            The navbar is stuck to the top of the screen for accessibility.
+            The buttons contained in it are largely similar to how buttons
+            would be used elsewhere on a page, and use similar design to 
+            the rest of the site. Their style comes almost entirely from 
+            the glow effect. When dormant, the buttons display only their 
+            text, but when hovered will display and indicative glow. The 
+            buttons gain an additional level of glow when active (being 
+            clicked on) as their form feedback to user interaction. 
+        </p>
+        <a class="navbtn" style="display: inline-block; float: none;">I am a navbtn</a>
+        <p>
+            Buttons on the rest of the page, however, may be inclined to 
+            use dormant shadow effect or some other indicator that it is
+            a button. The "btn" class (not to be confused with "button")
+            uses an additional layer of shadow to indicate hover and one
+            more for active.
+        </p>
+        <a class="btn">I am a btn</a>
+    </div>
+
+    <div class="section">
+        <h2>Media</h2>
+        <p>
+            The media containers used in this style guide do not inherently
+            use a shadow effect. Rather, they are intended to use whichever
+            glow class they want for each instance.  
+        </p>
+    </div>
+
 </body>
 <footer>
 
