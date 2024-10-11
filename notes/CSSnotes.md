@@ -124,21 +124,24 @@ Elements can be in different states (hover, visited, disabled, active) and can b
         - flex-start, flex-end, center, space-around, space-between 
       - *align-items*: positions children vertically
         - flex-start, flex-end, center, baseline, stretch
-      - *flex-grow*: specifies if items should grow with parent container (flex items do not grow with parent container by default)
-        - values are used as parts / total parts, where an element with value 2 will grow twice as fast as a 1 (horizontally, as the container grows)
-        - max-width will supercede flex-grow
-        - default is 0 (no growing)
-      - *flex-shrink*: default is 1
-      - *flex-basis*
-      - *flex*
-      - *flex-wrap*
+      - *flex-wrap*: determines if flex items can start on a new line (wrap, none) 
       - *align-content*
       - *flex-direction*
       - *flex-flow*
   - flex items
     - children of flex containers
     - do not begin on new lines
-    - 
+    - common attributes:
+      - *flex-grow*: specifies if items should grow with parent container (flex items do not grow with parent container by default)
+          - values are used as parts / total parts, where an element with value 2 will grow twice as fast as a 1 (horizontally, as the container grows)
+          - max-width will supercede flex-grow
+          - default is 0 (no growing)
+      - *flex-shrink*: default is 1
+      - *flex-basis*: specifies the width of an item before it shrinks (pixel value)
+      - __shorthand declaration__ can be used to declare all three at once:
+        - `flex: 1 2 90px;` (grow, shrink, basis)
+        - or: `flex: 2 90px;` (grow, basis)
+        - or: `flex: 1 2;` (grow, shrink)
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
