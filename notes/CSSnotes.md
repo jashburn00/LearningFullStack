@@ -120,10 +120,15 @@ Elements can be in different states (hover, visited, disabled, active) and can b
       - inline-flex lets us create a flexbox that is an inline element instead of a block element
     - flex elements take up their entire line width, similar to block elements.
     - uses other properties to specify how its children behave:
-      - *justify-content*
-      - *align-items*
-      - *flex-grow*
-      - *flex-shrink*
+      - *justify-content*: positions children from left to right
+        - flex-start, flex-end, center, space-around, space-between 
+      - *align-items*: positions children vertically
+        - flex-start, flex-end, center, baseline, stretch
+      - *flex-grow*: specifies if items should grow with parent container (flex items do not grow with parent container by default)
+        - values are used as parts / total parts, where an element with value 2 will grow twice as fast as a 1 (horizontally, as the container grows)
+        - max-width will supercede flex-grow
+        - default is 0 (no growing)
+      - *flex-shrink*: default is 1
       - *flex-basis*
       - *flex*
       - *flex-wrap*
