@@ -124,10 +124,14 @@ Elements can be in different states (hover, visited, disabled, active) and can b
         - flex-start, flex-end, center, space-around, space-between 
       - *align-items*: positions children vertically
         - flex-start, flex-end, center, baseline, stretch
-      - *flex-wrap*: determines if flex items can start on a new line (wrap, none) 
-      - *align-content*
-      - *flex-direction*
-      - *flex-flow*
+      - *flex-wrap*: determines if flex items can start on a new line 
+        - used instead of child shrinking?
+        - wrap, wrap-reverse, nowrap 
+      - *align-content*: similar to *align-items* but for multiple rows
+      - *flex-direction*: used to swap flex axis (vertical/horizontal)
+        - row, row-reverse, column, column-reverse
+      - *flex-flow*: shorthand for declaring *flex-direction* and *flex-wrap*
+        - e.g. `flex-flow: column wrap;`
   - flex items
     - children of flex containers
     - do not begin on new lines
