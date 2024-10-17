@@ -4,6 +4,8 @@
 - [How to apply styles](#how-to-apply-styles)
 - [Visual Rules](#visual-rules)
 - [Box Model](#box-model)
+- [Flexbox](#flexbox)
+- [Grids](#grids)
 - [Text & Fonts](#text-and-fonts)
 - [Accesibility Practices](#accessibility-practices)
 - [Wireframing](#wireframing)
@@ -146,6 +148,9 @@ Elements can be in different states (hover, visited, disabled, active) and can b
         - `flex: 1 2 90px;` (grow, shrink, basis)
         - or: `flex: 2 90px;` (grow, basis)
         - or: `flex: 1 2;` (grow, shrink)
+
+## Grids 
+- x
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
