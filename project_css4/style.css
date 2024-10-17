@@ -83,31 +83,6 @@ h2{
     padding-top: 10px;
 }
 
-#fallberry{
-    background-image: url("./images/img-berryblitz.jpg");
-    background-size: cover;
-}
-
-#spicedrum{
-    background-image: url("./images/img-spiced-rum.jpg");
-    background-size: cover;
-}
-
-#donuts{
-    background-image: url("./images/img-donut.jpg");
-    background-size: cover;
-}
-
-#myrtleave{
-    background-image: url("./images/img-myrtle-ave.jpg");
-    background-size: cover;
-}
-
-#bedford{
-    background-image: url("./images/img-bedford-bizarre.jpg");
-    background-size: cover;
-}
-
 #media2{
     background-image: url("./images/img-locations-background.jpg");
     background-size: cover;
