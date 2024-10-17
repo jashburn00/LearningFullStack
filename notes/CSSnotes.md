@@ -113,7 +113,7 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - *clear* property is used to handle collisions between float elements
   - the values (left, right, both, none), they indicate if the element should render on a new line when they are overlapped by a float element to the (left right or both).  
 
-### flexbox
+## flexbox
 - two main components:
   - flex containers
     - any element that contains flex items
@@ -150,7 +150,39 @@ Elements can be in different states (hover, visited, disabled, active) and can b
         - or: `flex: 1 2;` (grow, shrink)
 
 ## Grids 
-- x
+- used to organize the page, very cool 
+- must be declared of parent container 
+  - `display: grid;`
+- must declare number of rows and columns, each with given size 
+  - `grid-template-rows: 100px 120px 100px;`
+  - `grid-template-columns: repeat(3, 100px);`
+- grid size can use different units, most importantly __fractional units__, which take up a percentage of available space based on total units
+  - `grid-template-columns: 100px minmax(100px, 3fr) 1fr;`
+- you can declare *grid-template-areas* to keep track of positioning without line numbers
+  - `grid-template-areas: 'topleft topright' 'bottomleft bottomright';`
+  - this can then be used to position grid items: `grid-area: topleft;`
+- if items are assigned outside the bounds of the grid, the grid will grow new rows/cols to accommodate
+- this property can be controlled using *grid-auto-rows* and *grid-auto-flow*
+  - `grid-auto-rows: 100px;`
+  - `grid-auto-flow: column;`
+- *grid-gap* controls a gap between rows and cols, or specific to rows and cols
+  - `grid-gap: 10px;`
+  - `grid-gap: rows cols;`
+### grid children
+- positioning is done by using four properties 
+  - `grid-row-start`
+  - `grid-row-end`
+  - `grid-column-start`
+  - `grid-row-end`
+  - __grids and rows are 1-indexed and refer to divisions, not cells__
+- these can be concatenated into 
+  - `grid-row: 1 / 3;`
+  - `grid-column: 1 / 6;`
+- and further concatenated to *grid-area*
+  - `grid-area: row-start col-start row-end col-end;`
+  - think of it as ordered pairs (2,5), (5,1) being used to make a rectangle
+- __span__ can be used for spanning x divisions from current location:
+  - `grid-column: span 2;`
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
