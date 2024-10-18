@@ -152,11 +152,13 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 ## Grids 
 - used to organize the page, very cool 
 - must be declared of parent container 
-  - `display: grid;`
+  - `display: grid;` (can be inline)
 - must declare number of rows and columns, each with given size 
   - `grid-template-rows: 100px 120px 100px;`
   - `grid-template-columns: repeat(3, 100px);`
-- grid size can use different units, most importantly __fractional units__, which take up a percentage of available space based on total units
+  - these can be concatenated:
+  - `grid-template: rows rows / cols cols;`
+- grid size can use different units, most importantly __fractional units__, which take up a percentage of remaining space based on total units
   - `grid-template-columns: 100px minmax(100px, 3fr) 1fr;`
 - you can declare *grid-template-areas* to keep track of positioning without line numbers
   - `grid-template-areas: 'topleft topright' 'bottomleft bottomright';`
@@ -179,7 +181,7 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - `grid-row: 1 / 3;`
   - `grid-column: 1 / 6;`
 - and further concatenated to *grid-area*
-  - `grid-area: row-start col-start row-end col-end;`
+  - `grid-area: row-start / col-start / row-end / col-end;`
   - think of it as ordered pairs (2,5), (5,1) being used to make a rectangle
 - __span__ can be used for spanning x divisions from current location:
   - `grid-column: span 2;`
