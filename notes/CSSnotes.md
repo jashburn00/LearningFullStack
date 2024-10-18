@@ -153,6 +153,8 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - used to organize the page, very cool 
 - must be declared of parent container 
   - `display: grid;` (can be inline)
+- uses justify-items to align children horizontally in columns
+- uses justify-content to align the grid itself along the row axis
 - must declare number of rows and columns, each with given size 
   - `grid-template-rows: 100px 120px 100px;`
   - `grid-template-columns: repeat(3, 100px);`
