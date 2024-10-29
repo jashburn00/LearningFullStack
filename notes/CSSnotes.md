@@ -172,6 +172,7 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - *grid-gap* controls a gap between rows and cols, or specific to rows and cols
   - `grid-gap: 10px;`
   - `grid-gap: rows cols;`
+- *align-items* (start, end, center, stretch) aligns child items on the vertical axis
 ### grid children
 - positioning is done by using four properties 
   - `grid-row-start`
