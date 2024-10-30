@@ -166,13 +166,20 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - `grid-template-areas: 'topleft topright' 'bottomleft bottomright';`
   - this can then be used to position grid items: `grid-area: topleft;`
 - if items are assigned outside the bounds of the grid, the grid will grow new rows/cols to accommodate
-- this property can be controlled using *grid-auto-rows* and *grid-auto-flow*
-  - `grid-auto-rows: 100px;`
-  - `grid-auto-flow: column;`
+  - this property can be controlled:
+    - `grid-auto-rows: 100px;`
+    - `grid-auto-columns: 200px;`
+    - `grid-auto-flow: column;`
+      - this attribute can use "dense" value to attempt to auto-fill previous gaps in the grid, and can be paired: `row dense`
+  - the default formula is:
+    - generate new row, fill new row, repeat
+    - new rows are only tall enough to hold content 
 - *grid-gap* controls a gap between rows and cols, or specific to rows and cols
   - `grid-gap: 10px;`
   - `grid-gap: rows cols;`
 - *align-items* (start, end, center, stretch) aligns child items on the vertical axis
+- *justify-content* (start, end, center, stretch, space-around, space-between, space-evenly) aligns child items on the horizontal axis
+  - these attributes affect the rows and columns' alignment
 ### grid children
 - positioning is done by using four properties 
   - `grid-row-start`
@@ -188,6 +195,7 @@ Elements can be in different states (hover, visited, disabled, active) and can b
   - think of it as ordered pairs (2,5), (5,1) being used to make a rectangle
 - __span__ can be used for spanning x divisions from current location:
   - `grid-column: span 2;`
+- *align-self* and *justify-self* (start, end, center, stretch) will override their parent container's *justify* and *align* values
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
