@@ -6,6 +6,7 @@
 - [Box Model](#box-model)
 - [Flexbox](#flexbox)
 - [Grids](#grids)
+- [Sizing and Measurements](#sizing-and-measurements)
 - [Text & Fonts](#text-and-fonts)
 - [Accesibility Practices](#accessibility-practices)
 - [Wireframing](#wireframing)
@@ -196,6 +197,16 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - __span__ can be used for spanning x divisions from current location:
   - `grid-column: span 2;`
 - *align-self* and *justify-self* (start, end, center, stretch) will override their parent container's *justify* and *align* values
+
+## Sizing and Measurements
+- responsive design refers to the ability of a website to resize/reorganize based on:
+  - the size of other content on the website
+  - the size of the screen 
+- CSS can (should?) be used to avoid hardcoding size values
+### em
+- the `em` is a size unit 
+- represents the font size of the current element, or the default font size in browser
+-  
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
