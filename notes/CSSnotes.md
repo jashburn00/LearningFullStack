@@ -206,7 +206,11 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 ### em
 - the `em` is a size unit 
 - represents the font size of the current element, or the default font size in browser
--  
+-  ex: set headers font-size to `2em` so they scale with other text
+### rem
+- same as `em` but size based on the root element, not immediate parent
+  - root element is the `<html>` 
+  - default is `16px`
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
