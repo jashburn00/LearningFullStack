@@ -211,6 +211,11 @@ Elements can be in different states (hover, visited, disabled, active) and can b
 - same as `em` but size based on the root element, not immediate parent
   - root element is the `<html>` 
   - default is `16px`
+### other
+- setting `height: auto;` will automatically scale the height with the width as it resizes
+- __baackground images__
+    - *background-repeat*: (no-repeat, repeat) default is to repeat
+    - *background-size*: (cover, )
 
 ## Text and Fonts
 - *font-family* accepts a single value or a stack of fonts to be used as backups
