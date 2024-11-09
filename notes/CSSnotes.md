@@ -9,6 +9,7 @@
 - [Sizing and Measurements](#sizing-and-measurements)
 - [Text & Fonts](#text-and-fonts)
 - [Accesibility Practices](#accessibility-practices)
+- [Metadata](#metadata)
 - [Wireframing](#wireframing)
 
 ## How to apply styles
@@ -272,6 +273,35 @@ Elements can be in different states (hover, visited, disabled, active) and can b
     - gets complicated and can be abbreviated with a "..." breadcrumb
 - breadcrumbs may confuse users if they behave differently than expected
 - not recommended to have them as the only navigation structure
+
+## Responsive Design
+### metadata
+- `<meta>` tags
+    - used for document metadata
+    - always in the `head` section
+- *name* property to define which metadata and *content* property for value pairs
+    - description
+    - keywords
+    - author
+    - viewport
+        - e.g. `<meta name="viewport" content="width=device-width, initial-scale=1.0">` 
+            - this is default?
+
+### media queries
+- basic structure: `@media` `[type of device]` `and [(selector)] {` followed by a CSS rule
+    - more selectors can be concatenated with `and` or `,`
+        - using the comma separated list syntax is equivalent to "or"
+        - this can be used to select only in ranges (max width and min width etc.)
+    - then write a normal css rule inside the media selector brackets (brackets and all)
+    - the type of device is usually left blank and defaults to `all`
+- the rule will be applied to anything that fits the selector as the screen resizes
+- the media query selector *min-resolution* and *max-resolution* can be used with __dpi__ units to select based on screen resolution
+    - ex: `@media only screen and (min-resolution: 300dpi) {`
+- the media query selector *orientation* (landscape, portrait) is determined by comparing width to height
+#### breakpoints
+- breakpoints are the screen dimensions at which your CSS doesn't display properly
+- this can be combated by many CSS rules inside media selectors 
+- the best way to discover breakpoints is to resize your browser window
 
 ## Wireframing
 - similar to an architecture blueprint
