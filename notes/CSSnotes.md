@@ -9,7 +9,7 @@
 - [Sizing and Measurements](#sizing-and-measurements)
 - [Text & Fonts](#text-and-fonts)
 - [Accesibility Practices](#accessibility-practices)
-- [Metadata](#metadata)
+- [Repsonsive Design](#responsive-design)
 - [Wireframing](#wireframing)
 
 ## How to apply styles

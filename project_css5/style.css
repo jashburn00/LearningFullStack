@@ -27,7 +27,7 @@
 	display: inline-flex;
 	flex-flow: row; 
 	flex: 3 1 auto;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
 
