@@ -8,3 +8,8 @@
 - JS responds to browser events (button click, key press, etc.)
 - can be embedded in html file using the "< script>" tag
 
+### History of JavaScript
+- nerd shit
+
+
+
