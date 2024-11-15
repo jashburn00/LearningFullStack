@@ -68,6 +68,9 @@
 - __high order functions__ are functions that use functions as parameter and/or return type
 - syntax for passing in functions as arguments: pass in only the identifier, with no parentheses
 - e.g. `cleanData(useData, data);`
+- examples of high order functions:
+    - array builtin methods like `filter`:
+        -`const newList = words.filter(word => {return word.length == 3;});`
 
 
 
@@ -79,5 +82,4 @@
 
 
 
-
-
+make it shake make it clap -kodak black
