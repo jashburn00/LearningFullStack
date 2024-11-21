@@ -6,3 +6,11 @@ html, body{
 	margin: 0;
 	padding: 0;
 }
+
+.maincontent {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.maincontent #msg{
+	text-align: center;
