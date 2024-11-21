@@ -27,3 +27,20 @@
 - to restore a file in working directory to its last commit, use the command `git checkout HEAD filename`
 - to unstage a file from the current commit, use `git reset HEAD filename`
 - to revert current commit to a recent one, use `git reset commitSHA` where commitSHA is the first 7 chars of a recent commit 
+
+## Trunk based development
+- review those PRs
+- keep em small
+- make sure to delete after merge
+
+## What to put in a README
+- "at least something" -Codecademy
+- recommended features:
+    - title
+    - description
+    - features
+    - how to use
+    - technologies/frameworks used
+    - collaborators
+    - license 
+    - use headers
