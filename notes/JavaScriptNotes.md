@@ -2,6 +2,9 @@
 ## Contents
 <!-- no toc -->
 - [General Use Cases](#general-use-cases)
+- [Things I Don't Already Know](#things-i-dont-already-know)
+- [Objects: JS Edition](#objects-js-edition)
+- [Website Interactivity](#website-interactivity)
 
 ## General Use Cases
 - anything that isn't static information
@@ -72,14 +75,6 @@
     - array builtin methods like `filter`:
         -`const newList = words.filter(word => {return word.length == 3;});`
 
-
-
-
-
-
-
-
-
-
-
-make it shake make it clap -kodak black
+## Website Interactivity 
+- included using the `<script>` tag (must be closed)
+  - *src* property allows url to .js file
