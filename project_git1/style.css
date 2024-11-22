@@ -48,4 +48,18 @@ h1{
 	margin: 0.1rem auto;
 }
 
+.maincontent h2{
+	margin: 4rem auto;
+}
 
+.maincontent .info{
+	display: flex;
+	max-width: 50%;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.maincontent .info .sent{
+	margin: 2rem;
+	font-size: 1.5rem;
+}
