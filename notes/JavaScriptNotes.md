@@ -76,5 +76,20 @@
         -`const newList = words.filter(word => {return word.length == 3;});`
 
 ## Website Interactivity 
+### Scripts
 - included using the `<script>` tag (must be closed)
   - *src* property allows url to .js file
+- scripts are loaded and executed when reached by the HTML parser, potentially slowing load time
+- scripts are read in order of appearance, so order matters for dependencies
+- `defer` and `async` are used to combat this
+  - scripts with the defer attribute (no value) will load but not execute until the rest of the HTML is parsed
+    - this is useful when the script needs the DOM to finish parsing first
+  - the async attribute (no value) will cause the script to be loaded in the background as parsing continues
+    - useful for scripts that do not depend on other scripts, as it optimizes load time
+### The DOM
+- tree-like model that allows JS to access HTML elements
+- the `document` node is the root node of any DOM
+- elements and their properties can both be accessed through the DOM
+- you can append a child element in the DOM by setting the .innerHTML of an element to a valid HTML element
+  - ex: `'<h2>Heading</h2>'`
+- 
