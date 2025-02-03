@@ -77,7 +77,7 @@
 
 ## Website Interactivity 
 ### Scripts
-- included using the `<script>` tag (must be closed)
+- included using the `<scrit >` tag (must be closed)
   - *src* property allows url to .js file
 - scripts are loaded and executed when reached by the HTML parser, potentially slowing load time
 - scripts are read in order of appearance, so order matters for dependencies
@@ -91,5 +91,51 @@
 - the `document` node is the root node of any DOM
 - elements and their properties can both be accessed through the DOM
 - you can append a child element in the DOM by setting the .innerHTML of an element to a valid HTML element
-  - ex: `'<h2>Heading</h2>'`
-- 
+ 
+### Events
+- events fire on objects in the DOM
+- DOM elements can be given event listening functionality using `elt.addEventListener('event', function)`
+    - this way of adding event listeners allows for more than one to be added
+    - note the syntax of no parentheses in function name when adding event listeners 
+        - the browser automatically passes the Event object to the event handler function
+- event listeners can also be done using `elt.onevent = myfunc`
+- removed with `elt.removeEventListener('event', func)`
+- event properties:
+    - .target - the element which the event was registered to
+    - .type - the type of event
+    - .timeStamp - time in milliseconds since the document loaded and the event was triggered
+
+### Form Validation
+- term for ensuring bad data is not committed to a server or database
+- e.g. matching regex or testing values upon user submission
+#### Client-side validation
+- Regex
+    - use square brackets to include a list of characters, or ^ to denote any
+        - followed with asterisk to indicate any amount of this pattern
+    - use \d{X} to denote X numeric digits
+    - use literal characters as well 
+- can also use libraries
+#### server side/back-end validation
+- all data should initially be treated as invalid
+
+### Forms
+- must be created with the location where data will be sent and the type of request 
+    - ex: `<f orm action="/example.html" method="post"`
+- use < input> values
+    - ex: < input type="text" name="username" value="default text">
+    - "password" type value to obscure text automatically 
+    - "number" type allows limited symbols (-, +, .) 
+        - add the `step` property to include arrow buttons, and the increment amount as its value
+    - "range" type accompanied by a `min` and `max` value can also use step
+        - this creates a slider
+    - "checkbox" 
+- when form is submitted, input key value pairs are sent in the http request
+    - ex: "username=jeff100"
+- use labels for input fields
+    - ex: `< label for="inputfieldID">text</ label>`
+
+
+
+
+
+
