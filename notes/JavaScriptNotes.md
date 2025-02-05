@@ -129,6 +129,21 @@
     - "range" type accompanied by a `min` and `max` value can also use step
         - this creates a slider
     - "checkbox" 
+        - use the name and value attributes like other elements (but be wary that they do not render)
+            - the value property is what gets submitted in data; if unchecked, nothing is added
+        - group them using the name attribute (same name)
+    - "radio"
+        - you know how it go
+    - dropdown lists
+        - created with a < select> element with child < option> elements
+        - only requires the "value" attribute
+    - datalist
+        - used in place of < select> (instead use < datalist>) 
+        - uses child < options> but they are now searchable
+        - used as the backend of a "text" type input when the input uses the attribute list="mylist"
+            - where mylist is the id of your datalist
+    - "textarea"
+        - has attributes rows="2" and cols="30" for sizing 
 - when form is submitted, input key value pairs are sent in the http request
     - ex: "username=jeff100"
 - use labels for input fields
