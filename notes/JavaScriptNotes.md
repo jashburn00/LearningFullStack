@@ -123,9 +123,11 @@
     - ex: `<f orm action="/example.html" method="post"`
 - use < input> values
     - ex: < input type="text" name="username" value="default text">
+        - type text can use the 'minlength' and 'maxlength' attributes
     - "password" type value to obscure text automatically 
     - "number" type allows limited symbols (-, +, .) 
         - add the `step` property to include arrow buttons, and the increment amount as its value
+        - can use the 'min' and 'max' attributes
     - "range" type accompanied by a `min` and `max` value can also use step
         - this creates a slider
     - "checkbox" 
@@ -142,12 +144,27 @@
         - uses child < options> but they are now searchable
         - used as the backend of a "text" type input when the input uses the attribute list="mylist"
             - where mylist is the id of your datalist
-    - "textarea"
+    - textarea (not a type of input object)
         - has attributes rows="2" and cols="30" for sizing 
+        - set default text between the closing and opening tags 
+- use the 'required' attribute to make fields mandatory
+- many types of input can use the 'pattern' attribute, which allows a regex
 - when form is submitted, input key value pairs are sent in the http request
     - ex: "username=jeff100"
 - use labels for input fields
     - ex: `< label for="inputfieldID">text</ label>`
+- submitting forms
+    - simply use input of type "submit", and use the value attribute to set button text
+
+#### Using the form in JavaScript
+- assuming the form has been sent to 'page.html':
+1. page.html must use a JS source file script
+2. in the linked JS file, collect the values like so:
+    > const words = new URLSearchParams(window.location.search);
+3. now words contains the key value pairs from the request, and can be accessed like so:
+    > words.get('animal-1')
+4. now you are free to use them (populate a page, etc.)
+
 
 
 
