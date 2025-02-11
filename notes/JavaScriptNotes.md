@@ -165,6 +165,44 @@
     > words.get('animal-1')
 4. now you are free to use them (populate a page, etc.)
 
+## Classes 
+- example class: `
+    class Dog {
+        constructor(name) {
+            this._name = name;
+            this._age = 0;
+        }
+
+        get age(){
+            return this._age;
+        }
+
+        birthday(){
+            this._age++;
+            return this._age;
+        }
+    }
+
+    let sparky = new Dog('sparky');
+`
+- JS classes always use `this` to refer to an instance (such as itself)
+- uses `new` keyword to create instances
+- note the use of the get and set keywords
+    - use sparky.age as if it was a public data member in Java
+- note the use of the _ prefix to indicate private data members
+
+### Inheritance
+- uses the `extends` keyword 
+- unlike Java, the super call is explict and must be done before any reference to the instance
+    `
+    class WeenerDog extends Dog{
+        constructor(name, length){
+            super(name);
+            this._length = length;
+    }
+    `
+- 
+
 
 
 
