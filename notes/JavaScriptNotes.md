@@ -201,7 +201,17 @@
             this._length = length;
     }
     `
-- 
+- static methods are delcared by adding the keyword `static` before the function name
+
+
+## Modules
+- often used interchangeably with "files"
+- used to create modular systems and separate concerns
+### The Basics
+- importing/exporting code between modules
+
+
+
 
 
 
