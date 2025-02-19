@@ -208,7 +208,20 @@
 - often used interchangeably with "files"
 - used to create modular systems and separate concerns
 ### The Basics
-- importing/exporting code between modules
+- importing/exporting code between modules uses different syntax for the two main runtimes
+    - Node.js runtime 
+        - uses the `module.exports` and `require()` syntax
+            - to export things, create a property of the object `module.exports`
+                - e.g. `module.exports.sayHello = function sayHello(){ ...`
+                - e.g. `module.export.sayHello = sayHello;
+            - to import it elsewhere, use `require()` with the file path of the desired module
+                - e.g. `const myModule = require('./modules/myModule');`
+                - you can specify specific parts of an imported module like so:
+                    - `const {moduleFunction} = require('./myModule');`
+            - imported functions do not need to be prepended with the module name
+        - uses `process` instead of browser environments like window and document
+            - can use `process.argv[2]` to access parameters from command line runs
+    - browser runtime uses ES6 `import/export` syntax
 
 
 
