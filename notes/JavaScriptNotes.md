@@ -259,6 +259,34 @@
         - encompassing behavior/interaction/data should be *mocked*
     - integration tests
     - end-to-end tests
+## Creating a node project
+- install node and use npm to install mocha for testing
+    - use npm init to create a project and generate a package.json file
+    - after doing so, you can use npm install <package> -D to install and automatically add it as a dependency
+### Creating a test suite (using node and Mocha)
+- create a package.json file in the root directory, and include a json value like so:
+    ` "scripts": {
+        "test": "path/to/test/file.js"
+    }, `
+- then you can call npm test to run it
+- if you are using mocha, you can set "test": "mocha" then use the npm test command ...
+- you can use the `assert` library provided by Node for assert statements
+    - `const assert = require('assert');`
+    - assertions throw an error if a passed argument evaluates to false
+        - `assert.ok(4+4 === 8);`
+- creating tests can be broken into 3 parts:
+    - setup 
+    - exercise
+    - verify
+### mocha
+- uses "describe" and "it" statements
+    - describe statements group tests (can be nested)
+    - it statements explain a single test case
+- both statements are functions which are called with two parameters:
+    - a string to be used as the description
+    - a callback function (usually anonymous) which contains the code to be executed for the test
+        - tests are passed/failed using assert statements 
+
 
 
 
