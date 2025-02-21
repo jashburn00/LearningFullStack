@@ -222,12 +222,43 @@
         - uses `process` instead of browser environments like window and document
             - can use `process.argv[2]` to access parameters from command line runs
     - browser runtime uses ES6 `import/export` syntax
+        - to export from a module, include an export statement at the end of the module:
+            - `export { functionA, functionB };`
+            - you can export as default by creating an object which contains all export objects, then exporting the creatd object "as default"
+            - e.g. `const rss = { funcA, funcB }; export {rss as default};`
+        - import them using an import statement where needed:
+            - `import { functionA, functionB } from './module.js';`
+            - you can nickname imports to deal with name conflicts:
+                - `inport { commonNameFunction as nickname } from './module.js';`
+            - you can import defaults differently:
+                - `import myImports from './module.js';`
+                - `import { default as myImports } from './module.js';`
+        - HTML scripts that import modules __MUST__ use the attribute `type="module"`
 
+## Error Handling
+- javascript errors are objects
+    - have `name` and `message` properties
+    - declared as `Error('error message')`
+    - can use the `new` keyword as wellmistakes
+- errors only stop the execution if they are thrown using the `throw` keyword
+- use try-catch blocks for sections of code where we might anticipate an error
 
-
-
-
-
+## Testing 
+- manual testing
+    - done by human users, often given a list of common actions to perform and expected behaviors
+    - slow, costly, and prone to errors
+### automated testing
+- they use the `chai` library
+- automated testing can double as documentation
+- __regression__ is when the addition of a new feature breaks a previous feature (a.k.a. "the funcitonality regressed")
+> personally look into Chai, node/npm test command
+### types of testing
+- from cheapest/fastest to expensive/slowest:
+    - unit tests
+        - covers smallest units (e.g. a function)
+        - encompassing behavior/interaction/data should be *mocked*
+    - integration tests
+    - end-to-end tests
 
 
 
