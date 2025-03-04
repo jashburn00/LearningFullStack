@@ -286,7 +286,9 @@
     - a string to be used as the description
     - a callback function (usually anonymous) which contains the code to be executed for the test
         - tests are passed/failed using assert statements 
-
+- take care not to mutate the testing environment in a test case
+- use a "teardown" step at the end of each test case 
+    - usually you just reset the environment 
 
 
 
