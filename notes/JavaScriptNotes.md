@@ -221,6 +221,10 @@
             - imported functions do not need to be prepended with the module name
         - uses `process` instead of browser environments like window and document
             - can use `process.argv[2]` to access parameters from command line runs
+        - has filesystem library `fs`
+            - create a new file: `fs.appendFileSync(path, str)`
+                - if a file at path exists, it will append str to it; otherwise it makes a new file with str as content
+            - read a file: `fs.readFileSync(path)` returns contents of file found
     - browser runtime uses ES6 `import/export` syntax
         - to export from a module, include an export statement at the end of the module:
             - `export { functionA, functionB };`
@@ -251,7 +255,6 @@
 - they use the `chai` library
 - automated testing can double as documentation
 - __regression__ is when the addition of a new feature breaks a previous feature (a.k.a. "the funcitonality regressed")
-> personally look into Chai, node/npm test command
 ### types of testing
 - from cheapest/fastest to expensive/slowest:
     - unit tests
