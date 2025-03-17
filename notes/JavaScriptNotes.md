@@ -266,6 +266,21 @@
 - install node and use npm to install mocha for testing
     - use npm init to create a project and generate a package.json file
     - after doing so, you can use npm install <package> -D to install and automatically add it as a dependency
+### Node basics
+- import/export syntax:
+	- `const myModule = require('./modules/myModule.js');`
+		- `functionA(var);`
+	- `module.exports = { functionA, myArray };`
+- Helpful libraries
+	- `fs` (builtin) handles operations with file systems
+		- `fs.appendFileSync(path, str)` creates a file at `path` with content `str` OR appends to file
+		- `fs.readFileSync(path)` returns the contents of file at `path`
+		- `fs.unlinkSync(path)` deletes the file found at `path`
+	- `assert` (builtin) gives testing functions
+		- `assert.equal(a, b);` evaluates 
+	- `http` (builtin) handles HTTP servers and interactions
+	- `ws` (not builtin) for creating websockets
+
 ### Creating a test suite (using node and Mocha)
 - create a package.json file in the root directory, and include a json value like so:
     ` "scripts": {
@@ -275,12 +290,17 @@
 - if you are using mocha, you can set "test": "mocha" then use the npm test command ...
 - you can use the `assert` library provided by Node for assert statements
     - `const assert = require('assert');`
-    - assertions throw an error if a passed argument evaluates to false
+    - assert.ok will throw an error if a passed argument evaluates to falsy
         - `assert.ok(4+4 === 8);`
-- creating tests can be broken into 3 parts:
+    - assert.equals is a loose comparison
+    	- assert.strictEqual is strict 
+	- assert.deepStrictEqual compares the attributes of objects with strict equal
+		- different objects with identical values are not strictly equal (objects, arrays, etc.)
+- creating tests can be broken into 4 parts:
     - setup 
     - exercise
     - verify
+    - teardown
 ### mocha
 - uses "describe" and "it" statements
     - describe statements group tests (can be nested)
@@ -291,7 +311,13 @@
         - tests are passed/failed using assert statements 
 - take care not to mutate the testing environment in a test case
 - use a "teardown" step at the end of each test case 
-    - usually you just reset the environment 
+	- mocha provides hooks which can be used to handle similar teardowns
+	- these hook functions are to be called inside the `describe` callback 
+		- `beforeEach(callback)` runs before each test
+		- `afterEach(callback)` runs after each test
+		- before(callback)` runs before the first test
+		- after(callback)` runs after the last test
+
 
 
 
