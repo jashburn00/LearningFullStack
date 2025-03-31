@@ -351,7 +351,11 @@
 - there are a few ways to use spies, including function wrapping
 
 ## Async & HTTP
-
+- code that is not asynchronous is considered "blocked" - meaning it must wait for other code to finish executing
+- despite JavaScript being a single threaded language, it uses the "event loop" to simulate multithreading
+- many callback functions are considered asynchronous because they only execute in response to other events
+- `setTimeout(callback, ms)` can be used to delay the execution of the callback function by `ms` milliseconds
+- `setInterval(callback, ms)` calls the function every `ms` milliseconds
 
 
 
