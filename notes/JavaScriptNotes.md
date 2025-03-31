@@ -318,6 +318,14 @@
 		- before(callback)` runs before the first test
 		- after(callback)` runs after the last test
 
+## Test Driven Development
+- the main cycle is: 
+    - create test case first (it fails)
+    - create the minimum possible code to make it pass (e.g. return expected value)
+    - refactor the code after the test passes 
+- the process is that you continually go trough the "red-green-refactor" cycle until you are confident in your coverage
+    - dont forget edge cases
+
 
 
 

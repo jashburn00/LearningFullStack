@@ -221,12 +221,110 @@
             - imported functions do not need to be prepended with the module name
         - uses `process` instead of browser environments like window and document
             - can use `process.argv[2]` to access parameters from command line runs
+        - has filesystem library `fs`
+            - create a new file: `fs.appendFileSync(path, str)`
+                - if a file at path exists, it will append str to it; otherwise it makes a new file with str as content
+            - read a file: `fs.readFileSync(path)` returns contents of file found
     - browser runtime uses ES6 `import/export` syntax
+        - to export from a module, include an export statement at the end of the module:
+            - `export { functionA, functionB };`
+            - you can export as default by creating an object which contains all export objects, then exporting the creatd object "as default"
+            - e.g. `const rss = { funcA, funcB }; export {rss as default};`
+        - import them using an import statement where needed:
+            - `import { functionA, functionB } from './module.js';`
+            - you can nickname imports to deal with name conflicts:
+                - `inport { commonNameFunction as nickname } from './module.js';`
+            - you can import defaults differently:
+                - `import myImports from './module.js';`
+                - `import { default as myImports } from './module.js';`
+        - HTML scripts that import modules __MUST__ use the attribute `type="module"`
 
+## Error Handling
+- javascript errors are objects
+    - have `name` and `message` properties
+    - declared as `Error('error message')`
+    - can use the `new` keyword as wellmistakes
+- errors only stop the execution if they are thrown using the `throw` keyword
+- use try-catch blocks for sections of code where we might anticipate an error
 
+## Testing 
+- manual testing
+    - done by human users, often given a list of common actions to perform and expected behaviors
+    - slow, costly, and prone to errors
+### automated testing
+- they use the `chai` library
+- automated testing can double as documentation
+- __regression__ is when the addition of a new feature breaks a previous feature (a.k.a. "the funcitonality regressed")
+### types of testing
+- from cheapest/fastest to expensive/slowest:
+    - unit tests
+        - covers smallest units (e.g. a function)
+        - encompassing behavior/interaction/data should be *mocked*
+    - integration tests
+    - end-to-end tests
+## Creating a node project
+- install node and use npm to install mocha for testing
+    - use npm init to create a project and generate a package.json file
+    - after doing so, you can use npm install <package> -D to install and automatically add it as a dependency
+### Node basics
+- import/export syntax:
+	- `const myModule = require('./modules/myModule.js');`
+		- `functionA(var);`
+	- `module.exports = { functionA, myArray };`
+- Helpful libraries
+	- `fs` (builtin) handles operations with file systems
+		- `fs.appendFileSync(path, str)` creates a file at `path` with content `str` OR appends to file
+		- `fs.readFileSync(path)` returns the contents of file at `path`
+		- `fs.unlinkSync(path)` deletes the file found at `path`
+	- `assert` (builtin) gives testing functions
+		- `assert.equal(a, b);` evaluates 
+	- `http` (builtin) handles HTTP servers and interactions
+	- `ws` (not builtin) for creating websockets
 
+### Creating a test suite (using node and Mocha)
+- create a package.json file in the root directory, and include a json value like so:
+    ` "scripts": {
+        "test": "path/to/test/file.js"
+    }, `
+- then you can call npm test to run it
+- if you are using mocha, you can set "test": "mocha" then use the npm test command ...
+- you can use the `assert` library provided by Node for assert statements
+    - `const assert = require('assert');`
+    - assert.ok will throw an error if a passed argument evaluates to falsy
+        - `assert.ok(4+4 === 8);`
+    - assert.equals is a loose comparison
+    	- assert.strictEqual is strict 
+	- assert.deepStrictEqual compares the attributes of objects with strict equal
+		- different objects with identical values are not strictly equal (objects, arrays, etc.)
+- creating tests can be broken into 4 parts:
+    - setup 
+    - exercise
+    - verify
+    - teardown
+### mocha
+- uses "describe" and "it" statements
+    - describe statements group tests (can be nested)
+    - it statements explain a single test case
+- both statements are functions which are called with two parameters:
+    - a string to be used as the description
+    - a callback function (usually anonymous) which contains the code to be executed for the test
+        - tests are passed/failed using assert statements 
+- take care not to mutate the testing environment in a test case
+- use a "teardown" step at the end of each test case 
+	- mocha provides hooks which can be used to handle similar teardowns
+	- these hook functions are to be called inside the `describe` callback 
+		- `beforeEach(callback)` runs before each test
+		- `afterEach(callback)` runs after each test
+		- before(callback)` runs before the first test
+		- after(callback)` runs after the last test
 
-
+## Test Driven Development
+- the main cycle is: 
+    - create test case first (it fails)
+    - create the minimum possible code to make it pass (e.g. return expected value)
+    - refactor the code after the test passes 
+- the process is that you continually go trough the "red-green-refactor" cycle until you are confident in your coverage
+    - dont forget edge cases
 
 
 
