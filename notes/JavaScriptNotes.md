@@ -326,6 +326,31 @@
 - the process is that you continually go trough the "red-green-refactor" cycle until you are confident in your coverage
     - dont forget edge cases
 
+## Code Coverage & Test Coverage
+### Code Coverage
+- code coverage is the amount of the application that has been covered by test cases (as a %)
+- depending on the organiation, they will include criteria such as:
+    - has every function been called?
+        - has every statement been executed?
+            - has each boolean sub-expression evaluated as both true and false?
+                - has every edge in the control flow graph been traversed?
+
+### Test Coverage
+- test coverage refers to the percentage of required features that have been tested (as opposed to the % of lines executed)
+- e.g. writing tests for different devices and OS which should be supported
+
+## Mocking
+- mocking is creating a fake version of an external service for testing purposes
+    - a.k.a 'stubbing', which is a slightly different process
+- in integration tests, you should mock external services but not internal ones
+
+## Spies & SinonJS
+- spies are functions used to observe and record information about another function's calls
+    - such as callCount, wasCalled, calledWith, etc.
+- SinonJS is a library that includes standalone spies, fakes, and mocks
+- there are a few ways to use spies, including function wrapping
+
+## Async & HTTP
 
 
 
