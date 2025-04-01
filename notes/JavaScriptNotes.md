@@ -356,6 +356,20 @@
 - many callback functions are considered asynchronous because they only execute in response to other events
 - `setTimeout(callback, ms)` can be used to delay the execution of the callback function by `ms` milliseconds
 - `setInterval(callback, ms)` calls the function every `ms` milliseconds
+- the `await` keyword will halt the execution of code (at the point of the word) and wait for a Promise to resolve
+    - `await` can only be used inside an `async` function (but can be used freely in JS modules)
+    - this allows the line directly after to use the result of the Promise
+### The Event Loop
+- the event loop is a way of emulating parallel execution using the Heap, Call Stack, web APIs, and an event queue
+- web APIs handle asynchronous requests and pass things back to the stack using the event queue
+- the events from the event queue are added to the stack periodically if the stack is empty
+
+### Promises
+- promises are objects which represent eventual outcomes
+- promises have three states:
+    - pending (initial)
+    - fulfilled
+    - rejected
 
 
 
