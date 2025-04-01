@@ -370,6 +370,20 @@
     - pending (initial)
     - fulfilled
     - rejected
+- ex: 
+    `const myPromise = new Promise((resolve, reject) => { });`
+    - the resolve and reject functions can be called inside the promise's executor function to manually update the state of the promise and trigger the .then().catch() code defined elsewhere.
+        - the argument passed with the resolve() and reject() is usable in the .then() and .catch() 
+            - the .then() and .catch() must be called with anonymous functions defined to handle a parameter if you want to use one
+- promises are consumed using .then() and .catch()
+- .then() is a high order function which can take one, two, or zero callback functions as parameters
+    - order is fulfilledHandler, rejectedHandler
+    - .then() always returns a promise
+- "composition": oftentimes, promises will be chained together. One promise resolution may invoke another promise etc.
+    - when composing promise chains, you will likely be returning a promise inside each .then() success handler. In this case, the next .then() success handler will be in response to the previously returned promise.
+- common mistakes include:
+    - nesting promises instead of chaining them
+    - forgetting to return a promise (this is necessary for the next .then() to execute)
 
 
 
