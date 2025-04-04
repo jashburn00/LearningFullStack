@@ -365,13 +365,11 @@
 - the events from the event queue are added to the stack periodically if the stack is empty
 
 ### Promises
-- promises are objects which represent eventual outcomes
+- promises are **objects** which represent eventual outcomes
 - promises have three states:
     - pending (initial)
     - fulfilled
     - rejected
-- ex: 
-    `const myPromise = new Promise((resolve, reject) => { });`
     - the resolve and reject functions can be called inside the promise's executor function to manually update the state of the promise and trigger the .then().catch() code defined elsewhere.
         - the argument passed with the resolve() and reject() is usable in the .then() and .catch() 
             - the .then() and .catch() must be called with anonymous functions defined to handle a parameter if you want to use one
@@ -379,11 +377,69 @@
 - .then() is a high order function which can take one, two, or zero callback functions as parameters
     - order is fulfilledHandler, rejectedHandler
     - .then() always returns a promise
+- example creating promise:
+- ```
+    const myPromise = new Promise((res, rej) =>{ 
+        if (some condition){
+            res(successOutput)
+        } else {
+            rej(rejectedOutput)
+        }
+    });
+    ```
+- example consuming a promise:
+  ```
+    myPromise
+    .then( (val) => {
+        console.log('succes! got data: ', val)
+    })
+    .catch( (err) => {
+        console.log('error! response: ', err)
+    })
+  ```
 - "composition": oftentimes, promises will be chained together. One promise resolution may invoke another promise etc.
     - when composing promise chains, you will likely be __returning__ a promise (or promise function rather) inside each .then() success handler. In this case, the next .then() success handler will be in response to the previously returned promise.
 - common mistakes include:
     - nesting promises instead of chaining them
     - forgetting to return a promise (this is necessary for the next .then() to execute)
+- example chaining promises:
+  ```
+    myPromise.then((val) => {
+        //return another promise
+        return createNewPromise(val)
+    })
+    .then((val2) => {
+        //using the result of the first promise
+        return anotherPromiseOperation(val2)
+    })
+    .then((val3) => {
+        //using the result of the second promise
+        console.log('final value: ', val3)
+    })
+  ```
+- potential use cases for this type of code
+  - __when several asynchronous processes depend on each other and/or need to be executed in order__
+  - fetching data from external sources which may not be instant (e.g. external APIs, other files/modules)
+- you can handle several promises at once using `Promise.all(list)` __if you don't need them to be completed in a particular order__
+  - `Promise.all` accepts a list of promises and returns a list of the resolve values 
+  - if any of the values are a rejection value, the Promise.all returns a promise rejection (a.k.a. 'failing fast')
+  - you handle the Promise.all function as you would a normal promise
+  - example using Promise.all:
+    ```
+    let myPromises = Promise.all([returnsPromiseA(), returnsPromiseB()])
+
+    myPromises.then((responseArray) => {
+        //do stuff with the values
+    })
+    .catch((rejectReason) => {
+        //do stuff with rejection reason
+    })
+    ```
+### async & await
+- these keywords provide a more readable version of promises
+- the `await` keyword pauses the execution until a promise completes
+- it can only be used inside `async` functions
+- since it replaces .then() and .catch(), you will likely need to use it inside a try-catch block  
 
 
 
