@@ -380,7 +380,7 @@
     - order is fulfilledHandler, rejectedHandler
     - .then() always returns a promise
 - "composition": oftentimes, promises will be chained together. One promise resolution may invoke another promise etc.
-    - when composing promise chains, you will likely be returning a promise inside each .then() success handler. In this case, the next .then() success handler will be in response to the previously returned promise.
+    - when composing promise chains, you will likely be __returning__ a promise (or promise function rather) inside each .then() success handler. In this case, the next .then() success handler will be in response to the previously returned promise.
 - common mistakes include:
     - nesting promises instead of chaining them
     - forgetting to return a promise (this is necessary for the next .then() to execute)
