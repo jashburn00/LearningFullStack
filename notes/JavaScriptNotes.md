@@ -436,11 +436,37 @@
     })
     ```
 ### async & await
-- these keywords provide a more readable version of promises
-- the `await` keyword pauses the execution until a promise completes
-- it can only be used inside `async` functions
-- since it replaces .then() and .catch(), you will likely need to use it inside a try-catch block  
+- these keywords provide a more readable version of promises, which looks similar to synchronous code
+- the `await` operator:
+  - pauses the execution of its function until the promise completes
+  - returns the resolved value of a promise
+  - can only be used inside `async` functions
+- since it replaces .then() and .catch(), you may need to use it inside a try-catch block  
+- async functions *always return a promise*
+  - this allows you to use promise syntax (e.g. .then() .catch()) on async functions
+    - if the function returns nothing, the promise will resolve to `undefined`
+    - if the function returns a non-promise type, it returns a promise which has resolved to the return value
+    - if the function is written to return a promise, it will simply return the promise
+- example using async functions __as a promise__:
+```
+    async function doStuff(){
+        return 5;
+    }
 
+    doStuff()
+    .then((res) => {
+        //this should print '5'
+        console.log(res);
+    })
+```
+- example using __await__:
+  ```
+    async function printData(){
+        let data = await fetchExternalData();
+        console.log(data);
+    }
+  ``` 
+- note that forgetting to use `await` where you should be using it can cause unexpected return values, because a pending promise is returned
 
 
 
