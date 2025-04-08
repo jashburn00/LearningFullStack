@@ -526,12 +526,53 @@
     - responses contain a response code, which indicates the success of the operation
         - there are very many of these, but most common are: 200 OK, 201 CREATED, 204 NO CONTENT, 400 BAD REQUEST, 403 FORBIDDEN, 404 NOT FOUND, 500 INTERNAL SERVER ERROR
         - each HTTP verb (GET:200, POST: 201, PUT: 200, DELETE: 204) expects a certain status code on success
+    - responses also include the `Content-type` field which is a MIME type
+    - responses then can contain a body 
 
 #### MIME types
 - image: image/png, image/jpeg, image/gif
 - audio: audio/wav, audio/mpeg
 - video: video/mp4, video/ogg
 - application: application/json, application/pdf, application/xml, application/octet-stream
+
+### JSON Format
+- must always be typed in cursive and uses skulls as the dot in 'i' 
+- data types and notations:
+    - string: double quotes
+    - number: int or float
+    - object: name-value pair
+    - array: square brackets, comma delimited
+    - boolean: `true` or `false`
+    - `null`
+- unlike javascript, JSON requires the names in name-value pairs to be in double quotation marks
+- JavaScript has the builtin class JSON which can handle JSON data
+    - `JSON.parse(string)` will parse a string of JSON and create a javascript object from it
+    - javascript also has the builtin method `JSON.stringify(obj)` which turns an object into a JSON object
+
+### fetch() and API calls
+- the fetch() function creates a request object and sends it to the specified endpoint
+    - it returns a promise which is eventually fulfilled with the value of the response 
+- fetch() takes an argument for the endpoint's URL, and an optional JSON object argument to include as part of the request header
+    - in the optional JSON object, if you want to include a request body, you must set the value of `body` to JSON *as a string*
+- example fetch request for GET:
+```
+ fetch('https://api-to-call.com/endpoint')
+ .then((response) => {
+    if(response.OK){
+        return response.json;
+    }
+    throw new Error('bad status code');
+ }, (networkError) => {
+    console.log(networkError);
+ })
+ .then((jsonResponse) => {
+    //use the response
+ });
+```
+    - the example above first uses fetch() to create a request, resulting in a promise
+    - the promise is consumed using a .then(successHandler, failureHandler) call 
+        - this is simply syntactic sugar used in lieu of a .catch() call
+    - finally, a second .then() is chained on to handle successful responses 
 
 
 
