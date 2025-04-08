@@ -495,7 +495,43 @@
         - for use in browser-specific setting
     - third-party APIs
         - for use elsewhere
+## REST
+- representational state transfer is a web architecture standard for the web
+- they are stateless 
+    - the clients and servers know nothing about the state of the other
+    - every message can be understood without knowledge of previous messages
+- they separate client and server concerns
+    - this allows servers, clients, and other parts of a system to grow independently 
+    - easier to scale and maintain
+### Client-Server Communication
+- clients send requests to retrieve or modify resources
+    - requests typically have:
+        - an HTTP verb specifying the type of operation
+            - GET to retrieve a specific resource by ID or group of resources
+            - POST to create a new resource 
+            - PUT to update a specific resource by ID 
+            - DELETE to remove a specific resource by ID
+        - a header containing request metadata
+            - has an "Accept" field which specifies the type of data the client is able to receive
+                - the values are called 'MIME types' (Multipurpose Internet Mail Extensions) and are comprised of a type and subtype
+                    - ex: `text/html` or `text/plain`
+                    - incorrect subtype will cause the response to not be recognized
+        - a path to a resource
+            - conventionally, the first part of the path is to the plural form of the resource type (e.g. 'articles')
+                - ex: `GET store.com/customers/248`
+                - you can append an ID to the end of a path like so: `xyz.com/path/:id`
+        - an optional message body containing data
+        - example request: `GET articles/23 HTTP/1.1 Accept: text/html, application/xhtml`
+- servers send a response
+    - responses contain a response code, which indicates the success of the operation
+        - there are very many of these, but most common are: 200 OK, 201 CREATED, 204 NO CONTENT, 400 BAD REQUEST, 403 FORBIDDEN, 404 NOT FOUND, 500 INTERNAL SERVER ERROR
+        - each HTTP verb (GET:200, POST: 201, PUT: 200, DELETE: 204) expects a certain status code on success
 
+#### MIME types
+- image: image/png, image/jpeg, image/gif
+- audio: audio/wav, audio/mpeg
+- video: video/mp4, video/ogg
+- application: application/json, application/pdf, application/xml, application/octet-stream
 
 
 
