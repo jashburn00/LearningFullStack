@@ -576,6 +576,22 @@
   
 ***rebrand.ly API key: ca7c5afec81c42a683317b2851e482e2***
 
+- using the `async` `await` syntactic sugar can make this cleaner
+    - example using async await with fetch() :
+    ```
+    //inside an async function
+    const response = await fetch(someUrl);
+    try{
+        if(response.ok){
+            const jsonResponse = response.json();
+            //do stuff with the data
+        } 
+        throw new Error('Request failed!');
+    } catch (err) {
+        console.log(err);
+    }
+    ```
+
 
 
 
