@@ -569,10 +569,12 @@
     //use the response
  });
 ```
-    - the example above first uses fetch() to create a request, resulting in a promise
-    - the promise is consumed using a .then(successHandler, failureHandler) call 
-        - this is simply syntactic sugar used in lieu of a .catch() call
-    - finally, a second .then() is chained on to handle successful responses 
+  - the example above first uses fetch() to create a request, resulting in a promise
+  - the promise is consumed using a .then(successHandler, failureHandler) call 
+      - this is simply syntactic sugar used in lieu of a .catch() call
+  - finally, a second .then() is chained on to handle successful responses 
+  
+***rebrand.ly API key: ca7c5afec81c42a683317b2851e482e2***
 
 
 
