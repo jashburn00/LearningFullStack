@@ -629,5 +629,34 @@
 - API key: bdeee37071136c683523d8e7a17ef387
 - base url: https://api.themoviedb.org/3/
 
-## Web Apps
-- web apps and SPAs (single page applications) differ from static websites
+## Web Applications
+- web apps and single page applications (SPAs) differ from websites (connotatively)
+  - "website" typically denotes a set of pages which display information and which are related to each other. They are usually defined by their content
+  - "web application" typically denotes application software that runs on a web server and is accessed through a web browser. Web apps are usually defined by what the user does with them  
+- web app architecture is divided broadly into 3 layers, commonly listed as:
+  - presentation layer (browser)
+  - application layer (server)
+  - storage layer (database)
+- web applications can become very large and complex, often necessitating additional layers 
+- *the chrome extension "Wappalyzer" can show you the different technologies used in a website's tech stack*
+### Single Page Applications (SPA)
+- SPAs aim to include all the features of traditional websites with smoother UX
+- analogy: imagine you must have a waiter bring you each part of your meal individually when you want to take a bite out of the part (traditional website).
+- typically, SPAs are updated constantly using javascript, requesting small amounts of data as opposed to requesting new pages from a server
+- you could achieve this with vanilla javascript, but SPA complexity grows far too fast for this to be reasonable.
+- popular frameworks include:
+  - React
+  - Vue.js
+  - Angular JS
+  - Ember.js
+  - ExtJS
+  - Knockout.js
+  - Meteor.js
+- __SPA pros__:
+  - speed and performance, "feels like a desktop app"
+  - reuse of general components
+  - easier to migrate code to mobile apps (back end feeds data to decoupled front end)
+- __SPA cons__:
+  - more files required at startup (initial load time)
+  - not as good for traditional SEO
+  - can behave unexpectedly with browser features (back button, etc.)
