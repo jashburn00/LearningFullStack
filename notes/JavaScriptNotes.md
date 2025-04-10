@@ -495,7 +495,7 @@
         - for use in browser-specific setting
     - third-party APIs
         - for use elsewhere
-## REST
+### REST
 - representational state transfer is a web architecture standard for the web
 - they are stateless 
     - the clients and servers know nothing about the state of the other
@@ -553,7 +553,8 @@
 - the fetch() function creates a request object and sends it to the specified endpoint
     - it returns a promise which is eventually fulfilled with the value of the response 
 - fetch() takes an argument for the endpoint's URL, and an optional JSON object argument to include as part of the request header
-    - in the optional JSON object, if you want to include a request body, you must set the value of `body` to JSON *as a string*
+  - this object commonly will contain key-value pairs for method (GET, SET, ect.), headers (http headers), body, mode, credentials, cache, or redirect 
+  - in this optional JSON object, if you want to include a request body, you must set the value of `body` to JSON *as a string*
 - example fetch request for GET:
 ```
  fetch('https://api-to-call.com/endpoint')
@@ -580,10 +581,11 @@
     - example using async await with fetch() :
     ```
     //inside an async function
-    const response = await fetch(someUrl);
     try{
+        const response = await fetch(someUrl);
         if(response.ok){
-            const jsonResponse = response.json();
+            const jsonResponse = response.json(); 
+            //sometimes need await with .json()?
             //do stuff with the data
         } 
         throw new Error('Request failed!');
@@ -591,8 +593,41 @@
         console.log(err);
     }
     ```
+- POST requests require more data
+  - this data is passed in through fetch() as a second argument, in the form of a javascript object
+  - example using async POST request:
+    ```
+    //inside async function
+    try {
+        const response = await fetch(
+            url, {
+                method: 'POST',
+                body: dataInJSONformat,
+                headers: {
+                    'Content-type': 'application/json',
+                    'apikey': myAPIkey
+                }
+            }
+        )
+        if (response.ok){
+            //nice
+        }
+    } catch (err){
+        console.log(err);
+    }
+    ```
+#### Query Strings
+- often used in url to add arguments/specificity to API requests
+  - these are appended to the end of endpoint strings
+- basic format: `?some_value=${myVal}&another_value=${otherVar}`
+  - the `?` denotes the start of the query
+  - the form `key=value` is used
+  - `&` is used to concatenate key-value pairs
+- example: `https://poop.com/buckets?full=${fullDesired}&color=${favColor}`
+- it is common to combine variables holding the base url, the endpoint, and a query string into a single variable for a request
+***movie site thing***
+- API key: bdeee37071136c683523d8e7a17ef387
+- base url: https://api.themoviedb.org/3/
 
-
-
-
-
+## Web Apps
+- web apps and SPAs (single page applications) differ from static websites
