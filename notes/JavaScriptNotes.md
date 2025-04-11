@@ -660,3 +660,51 @@
   - more files required at startup (initial load time)
   - not as good for traditional SEO
   - can behave unexpectedly with browser features (back button, etc.)
+
+## Destructuring
+- destructuring is the process of convenientyl storing values from arrays or object properties in local variables
+  - `const [elt1, elt2] = myArray;`
+- you can put extra array elements in their own array
+  - `const [num1, num2, ...rest] = nums;`
+  - `//rest is now an array holding the rest of the elements in nums`
+- you can skip variables using commas
+  - `const [num1,, num3] = myArray;`
+- you can set default values using the equal sign
+  - `let [num1 = 0, num2 = 0] = myArray;`
+  - this value is taken when the element is 'undefined'
+- you can use it with objects (using curly brackets)
+  - `let {name, health} = myObj;`
+- you can use it inside function parameters
+  - `function foo({name, health}){...`
+- you can rename properties taken using colon
+  - `let { name: REname, health: REhealth = 100 } = myObj;`
+- you can use colon to access nested properties
+  - `let { topic: { subtopic } } = myObj;`
+  - now `subtopic` is a local var using the corresponsing value from `myObj`, assuming it was nested in the same way
+
+## React
+
+### The Virtual DOM
+- browsers re-render the page for each detected change
+  - it would be faster to only re-render the things that changed, *but* comparing DOMs is slow
+- a virtual DOM is a JavaScript object that represents the tree-like structure of the actual DOM
+  - comparing JavaScript objects is much faster than DOMs
+- the Virtual DOM diffs are reported to the browser, and only necessary parts are changed
+  - this prevents unnecessary re-rendering
+
+### React basics
+```
+const h1 = <h1>Hello world</h1>;
+```
+![meme](2r3xxq.jpg)
+
+- this is an example of __JSX__ 
+- JSX code cannot be interpreted by normal browsers because it is an extension of JavaScript syntax
+  - JSX code must be compiled to regular JavaScript by a JSX compiler before it reaches the browser
+- JSX elements are treated as javascript expressions, meaning they can "go anywhere javascript code can go"
+- they can be given attributes just like HTML elements
+  - `const p1 = <p id="large">foo</p>;`
+- JSX elements can be nested, like normal HTML
+  - if the JSX uses more than one line, it must be wrapped in `()`
+
+left off on "JSX Outer Elements"
