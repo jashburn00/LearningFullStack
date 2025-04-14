@@ -693,6 +693,7 @@
   - this prevents unnecessary re-rendering
 
 ### React basics
+### JSX
 ```
 const h1 = <h1>Hello world</h1>;
 ```
@@ -701,10 +702,41 @@ const h1 = <h1>Hello world</h1>;
 - this is an example of __JSX__ 
 - JSX code cannot be interpreted by normal browsers because it is an extension of JavaScript syntax
   - JSX code must be compiled to regular JavaScript by a JSX compiler before it reaches the browser
+- JSX elements must have exactly one outermost element
 - JSX elements are treated as javascript expressions, meaning they can "go anywhere javascript code can go"
 - they can be given attributes just like HTML elements
   - `const p1 = <p id="large">foo</p>;`
 - JSX elements can be nested, like normal HTML
   - if the JSX uses more than one line, it must be wrapped in `()`
+- __Differences between JSX and HTML__:
+  - JSX uses `className` instead of the `class` property
+    - ex: `<h1 className="big red">Hello world</h1>`
+  - self-closing tags in HTML are fine without the closing slash: `<br>`
+    - JSX elements __must__ include the closing slash `<br/>`
 
-left off on "JSX Outer Elements"
+### Rendering JSX
+- It revolves around a __root__ object, which uses the method `render()` to display JSX elements
+  - roots in React are created using `createRoot(elt)` which takes a DOM element as an argument
+
+### using JavaScript inside JSX
+- you must use curly braces
+  - ex: `const mathproblem = <div>2 + 3 = {2+3}</div>;`
+- JavaScript variables can be used in JSX expressions
+  - note that javascript scope applies to these variables as it would any others
+  - variables are commonly used to set attributes
+    - ex:
+    ```
+    const [w, l] = [200, 650];
+    const pics = {
+        logo: "http://buckets.com/img/28",
+        art: "https://buckets.com/img/10"
+    }
+    const logo = (
+        <img
+            src={pics.logo}
+            alt="logo"
+            height={l}
+            width={w} 
+        />
+    );
+    ```
