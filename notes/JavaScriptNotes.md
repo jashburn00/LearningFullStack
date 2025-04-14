@@ -692,7 +692,6 @@
 - the Virtual DOM diffs are reported to the browser, and only necessary parts are changed
   - this prevents unnecessary re-rendering
 
-### React basics
 ### JSX
 ```
 const h1 = <h1>Hello world</h1>;
@@ -740,3 +739,26 @@ const h1 = <h1>Hello world</h1>;
         />
     );
     ```
+### Event Listeners in JSX
+- JSX elements have event listeners just like HTML
+- in JSX, properties are given to assign event listening 
+    - ex: `const img = <img onClick={clickHandler} src={path}/>;`
+- example:
+    - onClick 
+    - onMouseOver
+- JSX elements __cannot__ contain any `if` statements, but does handle ternary operator (a?b:c) and `&&`, `||`
+    - you can conditionally add an element in JSX using embedded `&&`
+        - ex: `{myBool && <div>element to render</div> }`
+    - you can use `.map()` to add many elements to a list and then render them or add them to JSX elements
+        - this works because JSX accepts lists of elements in some cases (such as ul/li)
+        - sometimes lists of elements will require keys
+            - `key` is an attribute in JSX elements, and it is used because sometimes React will scramble the order of lists
+            - it is also used for elements that need to be "remembered" next time they are rendered
+            - keys must be a unique value (shocker) 
+- React components can be created without JSX using `React.createElement()`. This is secretly done for every JSX element 
+    - createElement() takes parameters for type, ???, and value
+
+
+
+
+
