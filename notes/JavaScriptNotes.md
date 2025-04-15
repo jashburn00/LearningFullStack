@@ -718,6 +718,8 @@ const h1 = <h1>Hello world</h1>;
   - roots in React are created using `createRoot(elt)` which takes a DOM element as an argument
 - the package `ReactDOM` is also needed for interacting with the DOM
     - typically done with: `import ReactDOM from 'react-dom/client';`
+- You only need to call render() once. After the first call, React will manage updates to the DOM
+    - typically, this first call is made from index.js and the rest of the updates are done in App.js
 
 ### using JavaScript inside JSX
 - you must use curly braces
@@ -771,8 +773,16 @@ const h1 = <h1>Hello world</h1>;
 
     root.render(<myComponent/>);
     ```
-- __function components__ use javascript functions to create React components
-
+- __function components__: use javascript functions to create React components
+    - return a JSX element 
+    - functional components usually follow PascalCase naming convention
+- typically components are created in App.js and exported to index.js for use
+- after creating, exporting, and importing a function component, you can simply use it as if it were a type of JSX element:
+```
+<MyComponent>poop</MyComponent>
+//OR
+root.render(<MyComponent/>);
+```
 
 
 
