@@ -716,6 +716,8 @@ const h1 = <h1>Hello world</h1>;
 ### Rendering JSX
 - It revolves around a __root__ object, which uses the method `render()` to display JSX elements
   - roots in React are created using `createRoot(elt)` which takes a DOM element as an argument
+- the package `ReactDOM` is also needed for interacting with the DOM
+    - typically done with: `import ReactDOM from 'react-dom/client';`
 
 ### using JavaScript inside JSX
 - you must use curly braces
@@ -757,6 +759,22 @@ const h1 = <h1>Hello world</h1>;
             - keys must be a unique value (shocker) 
 - React components can be created without JSX using `React.createElement()`. This is secretly done for every JSX element 
     - createElement() takes parameters for type, ???, and value
+
+### React Components
+- React apps are built using components
+    - components are small, reusable pieces of code that are responsible for one job (usually rendering some HTML and change it when some data changes)
+    - example component:
+    ```
+    function myComponent(){
+        return <h1>Hello world</h1>;
+    }
+
+    root.render(<myComponent/>);
+    ```
+- __function components__ use javascript functions to create React components
+
+
+
 
 
 
