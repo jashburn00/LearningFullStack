@@ -788,6 +788,16 @@ root.render(<MyComponent/>);
 - functional components can be created using event handlers 
     - it is easily done by defining the event handler function before returning the component (inside the functional component function)
 
+### Creating React Apps
+- use the `npm` (or `npx` which comes with npm5.2 and newer) command `npx create-react-app MyApp` to create a boilerplate React app 
+    - this comes complete with a .gitignore, package.json and package-lock, node modules
+        - npm commands are set up initially as well
+            - `npm start` to start the server
+### Using CSS with React
+- surprisingly simple
+- use a css file: `App.css`
+- import it in the main app file: `import './App.css'; //inside App.js`
+
 
 
 
