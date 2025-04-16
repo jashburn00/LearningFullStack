@@ -783,6 +783,10 @@ const h1 = <h1>Hello world</h1>;
 //OR
 root.render(<MyComponent/>);
 ```
+- including external values in components can be done by using javascript
+    - you must use variables reachable in the current scope, as normal
+- functional components can be created using event handlers 
+    - it is easily done by defining the event handler function before returning the component (inside the functional component function)
 
 
 
