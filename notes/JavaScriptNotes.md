@@ -793,12 +793,17 @@ root.render(<MyComponent/>);
     - this comes complete with a .gitignore, package.json and package-lock, node modules
         - npm commands are set up initially as well
             - `npm start` to start the server
+- *but how in the Aladeen does it work?*
+  - it compiles using __webpack__ and serves the app files for access (localhost port 3000 by default)
 ### Using CSS with React
 - surprisingly simple
 - use a css file: `App.css`
 - import it in the main app file: `import './App.css'; //inside App.js`
 
-
+### Sage wisdom and arcane knowledge
+- non-state objects will be reset on each react "rendering"
+  - only states (and keys?) are unchanged
+  - this can cause bugs if you forget how it works
 
 
 
