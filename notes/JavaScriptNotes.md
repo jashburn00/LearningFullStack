@@ -787,6 +787,7 @@ root.render(<MyComponent/>);
     - you must use variables reachable in the current scope, as normal
 - functional components can be created using event handlers 
     - it is easily done by defining the event handler function before returning the component (inside the functional component function)
+- __do not include `.js` at the end of the component path__
 
 ### Creating React Apps
 - use the `npm` (or `npx` which comes with npm5.2 and newer) command `npx create-react-app MyApp` to create a boilerplate React app 
@@ -800,11 +801,35 @@ root.render(<MyComponent/>);
 - use a css file: `App.css`
 - import it in the main app file: `import './App.css'; //inside App.js`
 
-### Sage wisdom and arcane knowledge
+### States & Maintaining Data Between Renders
 - non-state objects will be reset on each react "rendering"
   - only states (and keys?) are unchanged
   - this can cause bugs if you forget how it works
 
+### Props & Component Interactions
+- you can use other functional components inside functional component definitions (not that crazy) 
+- props are used to pass information between components
+  - requires a parameter in the receiving component
+  - automatically sent in the form of key=value pairs when used as properties 
+```
+return <MyComponent name="dookie" />
+// now the MyComponent(props) will have access to {props.name}
+```
+  - for non-string properties, you must use curly braces 
+    - ex: `<MyComp age={98} stuff={['frog', 'dog']} />`
+  - props values are immutable
+- props is often used to pass information to child components
+  - props are passed from parent to child to grandchild etc. in a top-to-bottom fashion
+  - props are often used outside of display (e.g. login info, data)
+- functions can be passed in with props
+  - like we do with onClick, you can pass the name (not the signature) of functions into props 
+  - commonly used for event handlers
+    - naming conventions for passing event handlers in props:
+      - the name of the property should be `onEvent` (where event is the event being handled)
+      - the name of the handler function should be `handleEvent`
+      - ex: `<MyComponent onJump={jumpHandler} />` 
+      - be careful to not mix up your own props-based `onClick` with HTML's similarly named attributes
+        - when using component instances, cases like this ^ result in props being created instead of  an HTML event listener 
 
 
 
