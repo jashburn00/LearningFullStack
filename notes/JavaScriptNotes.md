@@ -830,6 +830,28 @@ return <MyComponent name="dookie" />
       - ex: `<MyComponent onJump={jumpHandler} />` 
       - be careful to not mix up your own props-based `onClick` with HTML's similarly named attributes
         - when using component instances, cases like this ^ result in props being created instead of  an HTML event listener 
+- props always has a property called `children`, which returns all child elements of the component
+    - either as an array or as a single element
+- adding defaults to props can be done in three different ways:
+    - specifying `MyComponent.defaultProps` property
+        - uses object notation 
+    - destructuring in parameter definition (like normal functions)
+    - setting defaults in function body (like normal variables)
+        - ex: `const {text = 'default text'} = props.text;`
+### React Dev Tools
+- the chrome extension 'React Developer Tools' can be used on web pages which use React
+- the extension will display a colored logo if the page you're viewing uses React
+    - blue logo means the page is a production deployment 
+    - orange means development deployment
+- the extension contributes two tabs to the chrome dev tools:
+    - Components
+        - this is similar to HTML elements in web inspector but for react components
+        - you may need to clear some filters to see all components
+    - Profiler
+
+
+
+
 
 
 
