@@ -801,11 +801,6 @@ root.render(<MyComponent/>);
 - use a css file: `App.css`
 - import it in the main app file: `import './App.css'; //inside App.js`
 
-### States & Maintaining Data Between Renders
-- non-state objects will be reset on each react "rendering"
-  - only states (and keys?) are unchanged
-  - this can cause bugs if you forget how it works
-
 ### Props & Component Interactions
 - you can use other functional components inside functional component definitions (not that crazy) 
 - props are used to pass information between components
@@ -848,6 +843,21 @@ return <MyComponent name="dookie" />
         - this is similar to HTML elements in web inspector but for react components
         - you may need to clear some filters to see all components
     - Profiler
+### Hooks
+- hooks are React functions that can handle and manage states during runtime
+- the main hooks are:
+    - useState
+        - named import from the React library so it uses destructuring import (e.g. `import React, { useState } from 'react';`)
+        - returns an array with the initial state value and the state setter function 
+            - e.g. `const [toggle, setToggle] = useState(); //accepts argument for initial state`
+            - then you can use the setter to change the state which triggers a re-render
+            - e.g. `setToggle(false);`
+            - often used inside functional component definitions
+        - ex: a functional component which returns a few buttons, each having onClick set to an arrow function changing the state of the color of the outder div's style 
+    - useEffect
+    - useContext
+    - useReducer
+    - useRef
 
 
 
