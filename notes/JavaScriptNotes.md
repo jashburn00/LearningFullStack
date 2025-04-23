@@ -854,12 +854,23 @@ return <MyComponent name="dookie" />
             - e.g. `setToggle(false);`
             - often used inside functional component definitions
         - ex: a functional component which returns a few buttons, each having onClick set to an arrow function changing the state of the color of the outder div's style 
+        - state updates are __asynchronous__, and can potentially cause unexpected behavior (e.g. incrementing an integer twice asynchronously resulting in only incrementing by one)
+            - this can be prevented by setting states using a callback function rather than explicit values
+            - this makes use of state's previous value availability (ex: `setCount(curr => curr+1);`)
+            - this is especially useful for non-static values or values that depend on previous state
     - useEffect
+        - also a named export from the react library: `{ useEffect }`
+        - mostly used for fetch data from backend, subscribe to data streams, manage timers/intervals, read/change the DOM
+        - three main moments when useEffect is used:
+            - when a component is initially rendered (aka mounted) to the DOM
+            - when state or props change, causing a re-render
+            - when the component is removed (aka unmounted) from the DOM
+        - takes parameter for a callbackfn to execute in the three scenarios ^
+        - expects a return value of a function to be executed on each re-render and upon unmounting
+            - this function is used for teardown (e.g. for event listeners) to avoid memory leaks
     - useContext
     - useReducer
     - useRef
-
-
 
 
 
