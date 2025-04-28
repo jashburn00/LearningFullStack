@@ -868,6 +868,7 @@ return <MyComponent name="dookie" />
         - takes parameter for a callbackfn to execute in the three scenarios ^
         - expects a return value of a function to be executed on each re-render and upon unmounting
             - this function is used for teardown (e.g. for event listeners) to avoid memory leaks
+        - example: (inside component function) `useEffect(somefunction); //where somefunction returns the cleanup function`
     - useContext
     - useReducer
     - useRef
