@@ -70,7 +70,7 @@
 - functions are objects in JavaScript, and have properties such as name 
 - __high order functions__ are functions that use functions as parameter and/or return type
 - syntax for passing in functions as arguments: pass in only the identifier, with no parentheses
-- e.g. `cleanData(useData, data);`
+- e.g. `useData(cleanData, data);`
 - examples of high order functions:
     - array builtin methods like `filter`:
         -`const newList = words.filter(word => {return word.length == 3;});`
