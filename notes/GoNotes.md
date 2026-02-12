@@ -37,7 +37,7 @@
   - `var fibonacci []int = primes[1:4]`
 ### maps
 - maps
-  - key-value pairs following the convention `map[keyType]valueType
+  - key-value pairs following the convention `map[keyType]valueType`
   - `m := make(map[string]int)`
   - `m["firstkey"] = 1`
 ### loops
