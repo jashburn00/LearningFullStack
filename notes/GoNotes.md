@@ -133,6 +133,8 @@
 - for testing a file **main.go** the corresponding test file would be named **main_test.go** (they are both in the same package).
 - once complete, tests can be run using the command:
 > go test
+- verbose is preferred 
+> go text -v
 
 ### writing tests
 - inside the test file, you create test functions with the same name as they are in the testee file, prepended with 'Test' 
