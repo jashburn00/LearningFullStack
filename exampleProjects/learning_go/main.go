@@ -7,6 +7,20 @@ import (
 	"runtime"
 )
 
+func Hello(language string) (result string) {
+	result = "Hello, World!"
+
+	switch language {
+	case "":
+		return result
+	case "Spanish":
+		result = "Hola, Mundo!"
+	default:
+		return result
+	}
+	return
+}
+
 func main() {
 	title := "Quality Learing Center"
 	fmt.Printf("Welcome to the %s\n", title)
