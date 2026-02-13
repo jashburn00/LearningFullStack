@@ -22,12 +22,11 @@
 ## Project Structure
 - use the following command to initialize a Go project:
 > go mod init myproject
-- then you can start creating files:
-> touch main.go
+  - then you can start creating files
 - each file needs to start with a package name: `package main`
-- and an accompanying function: `func main() {...`
 - you can run a file with the run command:
 > go run main.go
+- good practice(?) to keep all modules 
 
 ## Basic Syntax and Data Types
 ### instantializing variables
@@ -165,3 +164,13 @@
 
 - by calling `t.Helper()` in the helper function, the compiler knows that the function is a helper
   - line numbers reported in failed test cases will be the line number calling the helper function instead of the helper function code block
+- **Example tests** are used for documentation purposes
+  - must start with `Example` just like test functions start with `Test`
+  - get automatically added to your package's documentation
+  - get executed after Test functions __IF__ they contain a `// Output: [value]` line
+
+            func ExampleAdd() {
+                sum := Add(1,5)
+                fmt.Println(sum)
+                // Output: 6
+            }
