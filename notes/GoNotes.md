@@ -6,16 +6,20 @@
   - [Project Structure](#project-structure)
   - [Basic Syntax and Data Types](#basic-syntax-and-data-types)
     - [instantializing variables](#instantializing-variables)
+    - [basic data types](#basic-data-types)
     - [functions](#functions)
+  - [Advanced data types](#advanced-data-types)
     - [arrays and slices](#arrays-and-slices)
     - [maps](#maps)
-    - [loops](#loops)
-    - [conditional statements](#conditional-statements)
-    - [error handling](#error-handling)
-    - [print statements](#print-statements)
-  - [User Defined Types](#user-defined-types)
-    - [struct](#struct)
-  - [Testing](#testing)
+    - [pointers](#pointers)
+    - [User Defined Types](#user-defined-types)
+  - [loops, flow, and conditional statements](#loops-flow-and-conditional-statements)
+    - [for loop syntax:](#for-loop-syntax)
+    - [range iteration](#range-iteration)
+    - [if statements:](#if-statements)
+    - [switch statements:](#switch-statements)
+  - [Testing and error handling](#testing-and-error-handling)
+  - [print statements](#print-statements)
     - [file organization](#file-organization)
     - [writing tests](#writing-tests)
 
@@ -26,12 +30,14 @@
 - each file needs to start with a package name: `package main`
 - you can run a file with the run command:
 > go run main.go
-- good practice(?) to keep all modules 
+- good practice(?) to keep all packages in their own folder inside the module 
 
 ## Basic Syntax and Data Types
 ### instantializing variables
 - `a := "hello world"` or `var a string`
+- `var i, j int = 1, 2`
 - assigning variables just uses `=`
+- const assignment cannot use `:=`
 - `const language = "EN"`
 - block declaration can be used in some situations (const declarations, import statements):
 
@@ -39,6 +45,18 @@
                 language = "EN"
                 date = "today"
             )
+
+### basic data types
+- basic data types:
+  - bool
+  - string
+  - int, int8, int16, int32, int64, uint, uint8, ... uint64, uintptr
+  - byte (alias for uint8)
+  - rune (alias for int32)
+  - float32, float64
+  - complex64, complex128
+- types can be converted using desiredtype(existingvalue)
+  - `f := float64(myint)`
 
 ### functions
 - name with PascalCase for public, and camelCase for private 
@@ -50,68 +68,110 @@
 
 - you can optionally name and type the return variable in the signature:
   - `func SayHello(name string) (result string) { ...`
+- high order functions need to declare the types of each parameter in parameter functions as well as the return type:
 
+            func HighOrd (toBeExecuted(int, int) int) string {
+                if toBeExecuted(1,3) > 5 {
+                    return "yay"
+                } else {
+                    return "nay"
+                }
+            }
+
+- __closures__
+  - function values that are bound to variables from outside the function body (because they are referenced inside the function body)
+
+            func fibonacci() func() int {
+                x := 0
+                y := 1
+                return func () int {
+                    result := x+y
+                    x, y = y, x+y
+                    return result
+                }
+            }
+
+
+## Advanced data types 
 ### arrays and slices
 - arrays 
   - fixed length and type 
-  - `fibonacci := [6]int{0,1,1,2,3,5}
+  - `fibonacci := [6]int{0,1,1,2,3,5}`
 - slices
-  - dynamic sizing
-  - `var fibonacci []int = primes[1:4]`
+  - slices do not store data, but are references to sections of arrays
+  - changing the elements in a slice mutates the referenced array (as well as other slices that share the same array) 
+  - declared slice literals create an array and then reference it 
+
+            var nums = [4]int{1,2,3,4}
+            var mySlice = nums[0,3] //contains 1,2
+
+            var a [10]int
+            // the following are all equivalent:
+            s1 := a[0:10]
+            s2 := a[:10]
+            s3 := a[0:]
+            s4 := a[:]
+
+  - slices have a length and a capacity - the capacity of the slice is the size of the referenced array
+    - `len(s1)` and `cap(s1)`
+  - zero (default) value of a slice is `nil` and has no referenced array
+  - you can use `make` for dynamically-sized arrays
+    - `make` allocates a zeroed out array and returns a slice that refers to the array
+
+            a := make([]int, 5) //len(a) = 5
+            b := make([]int, 5, 10) //optionally specify capacity
+
+  - you can append elements to slices like so:
+    - `s = append(s, 1, 2, 3)` where the appended elements are the same type as the rest of the slice
+    - `append` can be used to exceed the capacity of a slice, and will automatically allocate and populate a new array to accommodate the operation 
+
 ### maps
 - maps
   - key-value pairs following the convention `map[keyType]valueType`
-  - `m := make(map[string]int)`
-  - `m["firstkey"] = 1`
-### loops
-- for loop syntax: 
-            for i := 0; i < 5; i++ {
-                // do something
-            }
-- Go has no while loop, but you can use for loops to imitate it:
-            for sum < 5 {
-                sum += sum
-            }
-- you can use the "range" syntax to loop through slices conveniently:
-            s := []int{1,2,3,4,5}
-            for i, v := range s {
-                fmt.Println(i,v)
-            }
-- you can create an infinite loop with `for { `
-### conditional statements
-- if statements: 
-            if num1 > num2 {
-                //do stuff
-            } else {
-                //do other stuff
-            }
-- switch statements:
-            switch x {
-                case "uno":
-                    //do something
-                case "dos":
-                    //do something
-                default:
-                    //do something
-            }
-### error handling
-- many (most?) library functions return a value and an error 
-            f, err := os.Open("filename.txt")
-            if err != nil {
-                log.Fatal(err)
-            }
-### print statements
-- usually use the `fmt` library, which is similar to C's print functionality but has more features
+  - setting values: `m["key"] = 1`
+  - accessing values: `v := m["key"]`
+  - delete a value: `delete(m, key)`
+  - check if a key exists: 
 
-            fmt.Println("hello world")
-            fmt.Printf("%s times %d", "hello world", 100) //hello world times 100
-            s := fmt.Sprintf("I will be stored in a variable") //the 'S' prefix returns a string instead of printing
-- you can use `%q` to print something in quotation marks
+            elt, ok := m[key]
+    
+    - if the key is not found, elt will = the zero value of the map's element type 
 
+  - default (zero) map value is `nil`, and a `nil` map cannot be given new keys
+  - use the `make` function to initialize a map of a given type pair
+    - `m := make(map[string]int)`
+  - or you can declare a literal:
 
-## User Defined Types
-### struct
-- has keys and values, which can be functions
+            var m := map[string]int {
+                "kilogram": 2,
+                "car": 3000,
+                "yo mama": 93485092,
+            }
+
+  - you can omit type names when declaring literals inside of a map literal
+
+            var m := map[string]Vertex {
+                "origin": {2,9}
+            }
+
+### pointers
+- syntax: `var p *int`
+- default value is `nil`
+- the `&` operator generates a pointer to its operand
+
+            i := 42
+            p := &i
+
+- the `*` operator denotes the pointer's underlying value (dereferencing) 
+
+### User Defined Types
+- structs are collections of fields
+  - have keys and values, which can be functions
+
+            type Vertex struct {
+                X, Y int
+            }
+            
             type Person struct {
                 Name    String  `json:"name"`
                 Age     int     `json:"age"`
@@ -124,9 +184,91 @@
                 // use p.Age
             }
 
+- pointers to structs are allowed to skip explicit dereferencing
+  - `p.name` as opposed to `(*p).name` 
+- you can declare struct literals a few different ways:
+  
+            var v1 = Vertex{1,2}
+            var v2 = Vertex{Y: 1} //X: 0 is implicit
+            var v3 = Vertex{} // X: 0 and Y: 0
+            var p = &Vertex{0,1} //has type *Vertex
 
-## Testing
+## loops, flow, and conditional statements
+### for loop syntax: 
+
+            for i := 0; i < 5; i++ {
+                // do something
+            }
+
+- Go has no while loop, but you can use for loops to imitate it:
+
+            for sum < 5 {
+                sum += sum
+            }
+
+- you can create an infinite loop with `for { `
+
+### range iteration
+- you can use the "range" syntax to loop through slices conveniently:
+
+            s := []int{1,2,3,4,5}
+
+            for ind, elt := range s {
+                fmt.Println(ind,elt)
+            }
+
+- you can use `_` to skip (aka announce that you don't care about) the index or value
+- you can optionally use only one variable, and only have the index available in the loops
+
+### if statements: 
+  - if statements can use short statements before condition 
+    - variables dclared in this way are only scoped inside the if block and attached else blocks
+
+            if num1 > num2 {
+                //do stuff
+            } else {
+                //do other stuff
+            }
+            if x := 5; x > 3 {
+                //do stuff
+            }
+
+### switch statements:
+  - switch statements in Go short-circuit when a case succeeds
+  - switch statements do not need an argument
+
+            switch x {
+                case "uno":
+                    //do something
+                case "dos":
+                    //do something
+                default:
+                    //do something
+            }
+
+- 
+
+- `defer` defers the execution of the following statement until the surrounding function returns (aka scope is exited?)
+  - arguments are evaluated immediately but function calls are delayed (so it uses a closure? sometimes?) 
+- defer calls are pushed onto a stack (LIFO)
+- `panic` 
+
+## Testing and error handling
+- many (most?) library functions return a value and an error 
+            f, err := os.Open("filename.txt")
+            if err != nil {
+                log.Fatal(err)
+            }
+
 - standard library "testing"
+
+## print statements
+- usually use the `fmt` library, which is similar to C's print functionality but has more features
+
+            fmt.Println("hello world")
+            fmt.Printf("%s times %d", "hello world", 100) //hello world times 100
+            s := fmt.Sprintf("I will be stored in a variable") //the 'S' prefix returns a string instead of printing
+- you can use `%q` to print something in quotation marks
 
 ### file organization
 - for testing a file **main.go** the corresponding test file would be named **main_test.go** (they are both in the same package).

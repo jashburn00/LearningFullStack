@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"runtime"
+	"strings"
 )
 
 func Hello(language string) (result string) {
@@ -19,6 +20,20 @@ func Hello(language string) (result string) {
 		return result
 	}
 	return
+}
+
+func WordCount(s string) map[string]int {
+	whords := strings.Fields(s)
+	m := map[string]int{}
+	for _, word := range whords {
+		if _, ok := m[word]; ok {
+			m[word]++
+		} else {
+			m[word] = 1
+		}
+	}
+
+	return m
 }
 
 func main() {
