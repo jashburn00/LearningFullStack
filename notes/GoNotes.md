@@ -8,6 +8,7 @@
     - [instantializing variables](#instantializing-variables)
     - [basic data types](#basic-data-types)
     - [functions](#functions)
+    - [print statements](#print-statements)
   - [Advanced data types](#advanced-data-types)
     - [arrays and slices](#arrays-and-slices)
     - [maps](#maps)
@@ -18,8 +19,9 @@
     - [range iteration](#range-iteration)
     - [if statements:](#if-statements)
     - [switch statements:](#switch-statements)
+    - [defer](#defer)
+  - [Readers and I/O](#readers-and-io)
   - [Testing and error handling](#testing-and-error-handling)
-  - [print statements](#print-statements)
     - [file organization](#file-organization)
     - [writing tests](#writing-tests)
 
@@ -91,6 +93,26 @@
                 }
             }
 
+- __methods__
+  - functions belonging to a data type 
+  - need a special "receiver" argument before the signature
+    - `func (p Person) jump() {` where (p Person) is the receiver
+    - you can use pointer receivers as well: `(p *Person)` - helpful for mutating the receiver (non-static context)
+  - you can only create methods for data types that are defined *inside the current module*
+  - while functions with pointer parameters must receive a pointer, *methods* with pointer *receivers* will simply insert pointers for non-pointer receivers passed in.
+    - e.g. `func (p *Person) jump() {` will treat `bob.jump()` as if it were `(*bob).jump()`
+    - and vice-versa: functions with value receivers will accept pointer receivers and just treat them as value receivers
+  - typically, pointer receivers are preferred to avoid copying large structs and allow mutation
+  - best practice is for each data type to either have all pointer receivers or all value receivers (no race mixing)
+
+### print statements
+- usually use the `fmt` library, which is similar to C's print functionality but has more features
+
+            fmt.Println("hello world")
+            fmt.Printf("%s times %d", "hello world", 100) //hello world times 100
+            s := fmt.Sprintf("I will be stored in a variable") //the 'S' prefix returns a string instead of printing
+
+- you can use `%q` to print something in quotation marks
 
 ## Advanced data types 
 ### arrays and slices
@@ -165,11 +187,11 @@
 - the `*` operator denotes the pointer's underlying value (dereferencing) 
 
 ### User Defined Types
-- structs are collections of fields
+- **structs** are collections of fields
   - have keys and values, which can be functions
 
             type Vertex struct {
-                X, Y int
+                X, Y int    
             }
             
             type Person struct {
@@ -192,6 +214,38 @@
             var v2 = Vertex{Y: 1} //X: 0 is implicit
             var v3 = Vertex{} // X: 0 and Y: 0
             var p = &Vertex{0,1} //has type *Vertex
+
+- **interface** types are defined as a set of signatures
+
+            type Animal interface {
+                MakeNoise()
+            }
+
+- interface types can hold any literal value that implements those methods
+- there is never an explicit statement of a literal intending to implement an interface
+
+            type Dog struct {
+                Name string
+            }
+
+            func (d *Dog) MakeNoise(){
+                fmt.Println("*gets ripped in half*")
+            }
+
+            var Bubby Animal = Dog("Bubby")
+
+- now Bubby implements Animal implicitly
+- under the hood, interfaces are a tuple of (value, type)
+  - when you call the interface value e.g. MakeNoise() on Bubby, the method attached to the underlying type (in this case Animal)
+- sometimes an interface instance may have a `nil` value, and method calls will be sent with a `nil` receiver
+  - it is good practice to gracefully handle `nil` receivers. Interface tuples with a `nil` value are not themselves `nil`
+- type assertions can be done by declaring a variable of a certain type and assuming that the interface instance has that underlying concrete type
+
+            val, ok := Bubby.(Dog) //this would succeed
+            val, ok := Bubby.(int) //this would cause a panic
+
+
+
 
 ## loops, flow, and conditional statements
 ### for loop syntax: 
@@ -234,8 +288,8 @@
             }
 
 ### switch statements:
-  - switch statements in Go short-circuit when a case succeeds
-  - switch statements do not need an argument
+- switch statements in Go short-circuit when a case succeeds
+- switch statements do not need an argument
 
             switch x {
                 case "uno":
@@ -246,12 +300,44 @@
                     //do something
             }
 
-- 
+- **type switch** statements allow type assertions in quick succession
 
+            switch v := i.(type) {
+                case int:
+                    //do something
+                case string:
+                    //do something
+                case Dog:
+                    //rip it in half 
+            }
+
+### defer
 - `defer` defers the execution of the following statement until the surrounding function returns (aka scope is exited?)
   - arguments are evaluated immediately but function calls are delayed (so it uses a closure? sometimes?) 
 - defer calls are pushed onto a stack (LIFO)
-- `panic` 
+- `panic` ???
+
+## Readers and I/O
+- the `io` package includes an `io.Reader` interface which represents the read end of a stream of data
+  - ex:
+
+        func main() {
+            r := strings.NewReader("Hello, Reader!")
+
+            b := make([]byte, 8) //create slice of bytes
+            for {
+                n, err := r.Read(b) //iteratively read a byte
+                fmt.Printf("n = %v err = %v b = %v\n", n, err, b)
+                fmt.Printf("b[:n] = %q\n", b[:n])
+                if err == io.EOF {
+                    break
+                }
+            }
+        }
+
+- apparently a "Reader type" can mean output not consuming data 
+- "emit" means to fill a given buffer with bytes and return the number of bytes filled
+- "Reader" sometimes means "Rewriter" or "Writer" (gay)
 
 ## Testing and error handling
 - many (most?) library functions return a value and an error 
@@ -261,14 +347,6 @@
             }
 
 - standard library "testing"
-
-## print statements
-- usually use the `fmt` library, which is similar to C's print functionality but has more features
-
-            fmt.Println("hello world")
-            fmt.Printf("%s times %d", "hello world", 100) //hello world times 100
-            s := fmt.Sprintf("I will be stored in a variable") //the 'S' prefix returns a string instead of printing
-- you can use `%q` to print something in quotation marks
 
 ### file organization
 - for testing a file **main.go** the corresponding test file would be named **main_test.go** (they are both in the same package).
