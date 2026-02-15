@@ -14,6 +14,8 @@
     - [maps](#maps)
     - [pointers](#pointers)
     - [User Defined Types](#user-defined-types)
+    - [type parameters](#type-parameters)
+    - [generic types](#generic-types)
   - [loops, flow, and conditional statements](#loops-flow-and-conditional-statements)
     - [for loop syntax:](#for-loop-syntax)
     - [range iteration](#range-iteration)
@@ -21,6 +23,10 @@
     - [switch statements:](#switch-statements)
     - [defer](#defer)
   - [Readers and I/O](#readers-and-io)
+  - [Concurrency](#concurrency)
+    - [goroutines](#goroutines)
+    - [channels](#channels)
+    - [Locking and Mutex](#locking-and-mutex)
   - [Testing and error handling](#testing-and-error-handling)
     - [file organization](#file-organization)
     - [writing tests](#writing-tests)
@@ -244,8 +250,53 @@
             val, ok := Bubby.(Dog) //this would succeed
             val, ok := Bubby.(int) //this would cause a panic
 
+### type parameters
+- functions can be written to work on multiple types using type parameters 
+- type parameters are written in square brackets before arguments
 
+        func Index [T comparable](s []T, x T) int {
+            //this function's arguments can now be any type that
+            // supports comparison (this ensures you can use != 
+            // and ==)
+        } 
 
+### generic types 
+- using `[T any]`, you create a type parameter. Sort of like a placeholder for a type.
+- used for when you want a data structure to work for multiple types
+- When creating an instance of a type-parameterized object, you must pass the type in with the same square brackets 
+
+        type List[T any] struct {
+            Next *List[T]
+            value T
+        }
+
+        mh := List[string]{value: "more heroin"} 
+        h := List[string]{&mh, "heroin"}
+
+- instances of `List[string]` and `List[int]` are different concrete types
+- more examples:
+  - `type Stack[T any] struct { ...` allows for stacks of different types of data to be created 
+  - `func Map[T any] (s []T) []T { ...` this function will infer the type based on the input, but otherwise it simply accepts a slice of [T] and returns a slice of [T] (e.g. doubling all the numbers in a slice or something)
+    - here is an example to make that function accept only number types:
+  
+            // this interface "Number" describes both ints and floats
+            type Number interface{
+                ~int | ~float64
+            }
+
+            // this function requires a generic type described by "Number"
+            func Map[T Number] (s []T) []T {
+                result := make([]T, len(s))
+
+                for i, v := range s {
+                    result[i] = v*2
+                }
+
+                return result
+            }
+
+  - `func (l *List[T]) Add(v T) { ...` is a method of the type *List[T] that takes in a value of [T] 
+    - e.g. it adds the value of `v` to the receiver list 
 
 ## loops, flow, and conditional statements
 ### for loop syntax: 
@@ -318,7 +369,7 @@
 - `panic` ???
 
 ## Readers and I/O
-- the `io` package includes an `io.Reader` interface which represents the read end of a stream of data
+- the `io` package includes an `io.Reader` interface which represents the "read end of a stream of data"
   - ex:
 
         func main() {
@@ -335,12 +386,187 @@
             }
         }
 
-- apparently a "Reader type" can mean output not consuming data 
 - "emit" means to fill a given buffer with bytes and return the number of bytes filled
-- "Reader" sometimes means "Rewriter" or "Writer" (gay)
+- "Reader" sometimes acts more like a "Rewriter" or "Writer"  
+
+## Concurrency
+- performance tricks fuck yeah
+- in the below example, trees are "walked" concurrently 
+
+        package main
+
+        import "golang.org/x/tour/tree"
+        import "fmt"
+        /*
+        type Tree struct {
+            Left  *Tree
+            Value int
+            Right *Tree
+        }
+        */
+
+        // Walk walks the tree t sending all values
+        // from the tree to the channel ch.
+        func Walk(t *tree.Tree, ch chan int) {
+            if (t.Left != nil) {
+                Walk(t.Left, ch)
+            }
+            ch <- t.Value
+            if(t.Right != nil){
+                Walk(t.Right, ch)	
+            }
+        }
+
+        // Same determines whether the trees
+        // t1 and t2 contain the same values.
+        func Same(t1, t2 *tree.Tree) bool {
+            ch1 := make(chan int)
+            ch2 := make(chan int)
+            
+            go func() {
+                Walk(t1, ch1)
+                close(ch1)
+            }()
+            go func() {
+                Walk(t2, ch2)
+                close(ch2)
+            }()
+            
+            
+            var result1, result2 string 
+            
+            for v1 := range ch1 {
+                result1 = result1 + fmt.Sprintf("%d",v1)
+            }
+            
+            for v2 := range ch2 {
+                result2 = result2 + fmt.Sprintf("%d",v2)
+            }
+            
+            
+            
+            return result1 == result2
+        }
+
+        func main() {
+            if Same(tree.New(1), tree.New(1)) {
+                fmt.Println("Success!")
+            } else {
+                fmt.Println("Failure.")
+            }
+            
+            if Same(tree.New(1), tree.New(3)) {
+                fmt.Println("Failure.")
+            } else {
+                fmt.Println("Success!")
+            }	
+            
+        }
+
+### goroutines
+- goroutines are lightweight threads managed by the Go runtime
+- start a goroutine with `go`
+  - `go foo(x)`
+  - the evaluation of `foo(x)` happens in the new goroutine 
+- goroutines run in the same address space, so access to shared memory must be synchronized. 
+  - the `sync` package provides primitives, but you won't always need those
+
+### channels 
+- are FIFO 
+- must be declared (with type) before use: `ch := make(chan int)`
+- functions can restrict the direction of channel parameters
+  - `func Consume(ch <-chan int) { ...` this parameter channel can only be used to have variables receive values 
+- by default, send and receive operations are blocking until both sides are ready 
+  - send: `ch <- 42`
+  - receive: `num := <- ch`
+- buffered channels can help prevent this
+  - `ch := make(chan int, 3)` this channel can accept 3 sends before sends become blocking
+  - receiving from the channel is only blocking if the channel is empty
+- should be closed by senders, not receivers (best practice), *but* channels do not always need to be closed
+  - closing a channel is only necessary when the receivers need to be notified that there will be no more values coming
+
+            func sum( s []int, c chan int){
+                sum := 0
+                for _, v := range s {
+                    sum += v
+                }
+                c <- sum //send sum to channel instead of returning
+            }
+            
+            go sum(sliceA, channelToUse)
+            go sum(sliceB, channelToUse)
+            x, y := <-c, <-c
+
+            fmt.Println(x, y, x+y)
+            
+- __deadlocks__ occur when there are leftover channels with no further receiving operations, and they are a fatal error
+- channels can be closed with `close(ch)`
+  - you can check for closure when receiving: `v, ok := <- ch`
+    - `ok == false` indicates channel closed 
+  - the `range` feature can automatically detect closure
+
+        func Producer(ch chan int){
+            for i := 1; i <= 5; i++ {
+                ch <- i
+            }
+            close(ch)
+        }
+
+        func main(){
+            ch := make(chan int)
+
+            go Producer(ch)
+
+            //this for loop will stop once ch is closed
+            for v := range ch {  
+                fmt.Println(v) 
+            } 
+        }
+
+- **select** lets a goroutine wait on several channel operations and proceed with the first one that becomes ready
+  - "wait until one of these channel send or receive ops can proceed, then proceed with it"
+- `select` blocks until one of the cases is ready
+  - if several are ready, one is chosen at random
+
+            select {
+                case v := <- ch1:
+                    //ready to receive something from ch1
+                case ch2 <-x:
+                    //ready to send something into ch2
+                default:
+                    //runs immediately if no channels available 
+                    //(optional)
+                    // can be useful for situations like:
+                    // "not ready yet"
+            }
+
+- use the `time.After(Time)` function to implement timeouts 
+  - `time.After` returns a channel that sends once after the specified duration
+
+        select {
+            case x <- ch:
+                //value received
+            case <- time.After(time.Second * 2):
+                //fmt.Println("timed out")
+        }
+
+- you can also use `select` to implement an infinite event loop pattern:
+
+        for {
+            select {
+                case msg <- ch1:
+                    //received a message 
+                case cmd <- ch2:
+                    //received a command 
+            }
+        }
+
+### Locking and Mutex
+- TODO
 
 ## Testing and error handling
 - many (most?) library functions return a value and an error 
+
             f, err := os.Open("filename.txt")
             if err != nil {
                 log.Fatal(err)
