@@ -26,7 +26,8 @@
   - [Concurrency](#concurrency)
     - [goroutines](#goroutines)
     - [channels](#channels)
-    - [Locking and Mutex](#locking-and-mutex)
+    - [Locking and sync.Mutex](#locking-and-syncmutex)
+    - [sync.WaitGroup](#syncwaitgroup)
   - [Testing and error handling](#testing-and-error-handling)
     - [file organization](#file-organization)
     - [writing tests](#writing-tests)
@@ -561,8 +562,33 @@
             }
         }
 
-### Locking and Mutex
-- TODO
+### Locking and sync.Mutex
+- the `sync` standard library includes `sync.Mutex` which is an object used to implement mutual exclusion
+  - this is done with the `.Lock()` and `.Unlock()` methods
+  - these methods ensure a locked block of code (most importantly its variables) cannot be accessed by other goroutines while executing 
+
+            type ProtectedCounter struct {
+                mx sync.Mutex
+                count int
+            }
+
+            func (c *ProtectedCounter) Increment() {
+                c.mx.Lock()
+                // defer c.mx.Unlock()
+
+                count = count + 1
+
+                c.mx.Unlock()
+            }
+
+### sync.WaitGroup
+- used to handle the common pattern of fanning tasks feeding into one output location
+- done with `sync.WaitGroup` methods `Add(int)`, `Done()`, and `Wait()`
+- e.g. 
+  - initialize a global `sync.WaitGroup` var 
+  - call `wg.Add(1)` just before spawning each goroutine
+  - call `wg.Done()` at the end of each goroutine/task
+  - call `wg.Wait()` where you need to wait for the group to finish
 
 ## Testing and error handling
 - many (most?) library functions return a value and an error 
