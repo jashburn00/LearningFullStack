@@ -28,6 +28,10 @@
     - [channels](#channels)
     - [Locking and sync.Mutex](#locking-and-syncmutex)
     - [sync.WaitGroup](#syncwaitgroup)
+  - [HTTP and Network](#http-and-network)
+  - [Context](#context)
+    - [Context library Functions](#context-library-functions)
+    - [examples](#examples)
   - [Testing and error handling](#testing-and-error-handling)
     - [file organization](#file-organization)
     - [writing tests](#writing-tests)
@@ -589,6 +593,166 @@
   - call `wg.Add(1)` just before spawning each goroutine
   - call `wg.Done()` at the end of each goroutine/task
   - call `wg.Wait()` where you need to wait for the group to finish
+
+## HTTP and Network
+- standard library is good supposedly: `"net/http"`
+- http.Request objects have a context field
+- example creating an endpoint:
+
+            // create func to process the request
+            func helloHandler(w http.ResponseWriter, r http.Request) {
+                //check if passed user id
+                userId := r.FormValue("userId")
+                //query the database
+            }
+
+            //example helper function
+            //return type is function so that it can be used as a wrapper 
+            func authenticate(next http.HandlerFunc) http.HandlerFunc{
+                return func(w http.ResponseWriter, r http.Request){
+                    userId := r.FormValue("userId")
+                    password := r.FormValue("password")
+
+                    //query the database for user data
+                    if username == "" || password != expectedPwd {
+                        http.Error(w, "Forbidden", http.StatusForbidden)
+                        return
+                    }
+
+                    next.ServeHttp(w, r)
+                }
+            }
+
+            func main(){
+                //declare the func as a handler of an endpoint
+
+                http.HandleFunc("/hello", authenticate(helloHandler))
+            }
+
+## Context
+- uses the standard library "context"
+- type `context.Context interface`:
+  - `Deadline() (deadline time.Time, ok bool)` returns the time at which this context's work should be cancelled. Returns `ok == false` when no deadline is set
+  - `Done()` returns a channel which is closed after the context's work should be cancelled
+  - `Err()` returns an error
+  - `Value(key any) any` returns 
+### Context library Functions
+- contexts can be used with functions from the context library:
+  - `context.WithTimeout(context.Context, time)` is used to make sure we can cancel the context's work. It returns `Context, Cancel` where Cancel is a function that cancels the work. Cancel should be defer called so that the context is closed if the task completed successfully 
+
+            ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
+            defer cancel() //so that the context is closed once work is completed 
+
+            //do stuff
+            done := make(chan bool)
+            go openConnection(done) 
+            //assuming openConnection passes ch <- true when done
+            select {
+                case <- done:
+                    //connection successful
+                case <- ctx.Done()
+                    //connection timed out 
+                    //we know because this Done() is returned after timeout
+            }
+
+            //the defer cancel() applies here to close the context 
+
+- the `Deadline()` method returns the deadline when the context will time out
+  - `fmt.Println(ctx.Deadline())`
+- the `Err()` method returns the error from the context object
+- the `Value()` method relates to passing data in context objects
+  - `ctx := context.WithValue(context.Context, "key", "value")`
+  - `v := ctx.Value("key")`
+  - pass in multiple key-value pairs by calling the method again on the same contextf
+
+### examples
+- example creating an HTTP request with context:
+
+            ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+            defer cancel()
+
+            url := "http://worldtimeapi.org/api/timezone/America/Toronto"
+            req, _ := http.NewRequestWithContext(ctx, "GET", url, nil)
+
+            client := &http.Client{}
+            resp, err := client.Do(req)
+            if err != nil {
+                panic(err)
+            }
+            defer resp.Body.Close()
+
+            fmt.Println("Response status: ", resp.Status)
+
+- note that the below example does **not** make use of contexts, and ends up querying the database twice for the same data:
+
+            // create func to process the request
+            func helloHandler(w http.ResponseWriter, r http.Request) {
+                //check if passed user id
+                userId := r.FormValue("userId")
+                //query the database
+            }
+
+            //example helper function
+            //return type is function so that it can be used as a wrapper 
+            func authenticate(next http.HandlerFunc) http.HandlerFunc{
+                return func(w http.ResponseWriter, r http.Request){
+                    userId := r.FormValue("userId")
+                    password := r.FormValue("password")
+
+                    //query the database for user data
+                    if username == "" || password != expectedPwd {
+                        http.Error(w, "Forbidden", http.StatusForbidden)
+                        return
+                    }
+
+                    next.ServeHttp(w, r)
+                }
+            }
+
+            func main(){
+                //declare the func as a handler of an endpoint
+
+                http.HandleFunc("/hello", authenticate(helloHandler))
+            }
+
+- To optimize, you can add fetched values to the request context for reuse:
+
+            // create func to process the request
+            //thanks to authenticate(), this function will have username and pwd context
+            func helloHandler(w http.ResponseWriter, r http.Request) {
+                //use context data
+                userName := r.Context().Value("username").(string)
+
+                fmt.Println("Hello, ", userName)
+            }
+
+            //example helper function
+            //return type is function so that it can be used as a wrapper 
+            func authenticate(next http.HandlerFunc) http.HandlerFunc{
+                return func(w http.ResponseWriter, r http.Request){
+                    userId := r.FormValue("userId")
+                    password := r.FormValue("password")
+
+                    //query the database for user data
+                    if username == "" || password != expectedPwd {
+                        http.Error(w, "Forbidden", http.StatusForbidden)
+                        return
+                    }
+                    ctx := context.WithValue(r.Context(), "username", username)
+                    ctx = context.WithValue(r.Context(), "password", password)
+                    r.context = ctx
+                    next.ServeHttp(w, r)
+                }
+            }
+
+            func main(){
+                //declare the func as a handler of an endpoint
+
+                http.HandleFunc("/hello", authenticate(helloHandler))
+
+                //ListenAndServe(addr string, handler Handler) always returns an error
+                log.Fatal(http.ListenAndServe(":8080", nil))
+            }
 
 ## Testing and error handling
 - many (most?) library functions return a value and an error 
