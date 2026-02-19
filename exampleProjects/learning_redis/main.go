@@ -13,7 +13,7 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-func main() {
+func Main() {
 	fmt.Println("Hello Redis")
 
 	client := redis.NewClient(&redis.Options{
@@ -23,7 +23,7 @@ func main() {
 	})
 
 	ctxFiveSeconds, cancel := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancel()
+	defer cancel() //don't forget to close the context to avoid memory leaks
 
 	fmt.Println("Attempting to ping localhost Redis server...")
 	ping, err := client.Ping(ctxFiveSeconds).Result()
@@ -115,4 +115,12 @@ func main() {
 		panic(err)
 	}
 	fmt.Println("We received the hash: \n", hashMap)
+}
+
+func CacheIntoRedis(ctx context.Context, client *redis.Client, key string, value string, expiration time.Duration) error {
+	err := client.Set(ctx, key, value, expiration).Err()
+	if err != nil {
+		return err
+	}
+	return nil
 }
