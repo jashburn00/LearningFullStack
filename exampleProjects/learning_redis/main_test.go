@@ -56,7 +56,7 @@ func TestCacheIntoRedis(t *testing.T) {
 			if err != nil {
 				t.Errorf("error encountered: %s", err.Error())
 			}
-			time.Sleep(time.Second * 2)
+			time.Sleep(time.Second * 2) //timing out a Redis key's TTL removes both the key and value
 			val, err := client.Get(ctx, "Now You See Me").Result()
 			if val != "" {
 				t.Errorf("error encountered: val was %q but should be empty", val)
