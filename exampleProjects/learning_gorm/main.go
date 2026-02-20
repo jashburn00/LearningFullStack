@@ -1,10 +1,7 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"net/http"
-	"time"
 )
 
 func Main() {
