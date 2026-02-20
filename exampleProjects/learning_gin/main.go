@@ -37,6 +37,7 @@ func InitGinServer(writer io.Writer) (err error) {
 	})
 
 	r.SetTrustedProxies(nil) //Gin will look for and believe forwarded IP headers from trusted proxy addresses
+	//otherwise, if a peer is not trusted, peer's IP will be used
 	//start a server with default options on default port 8080: r.Run()
 	err = r.Run("127.0.0.1:8080")
 
