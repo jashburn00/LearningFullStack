@@ -35,6 +35,9 @@
   - [Testing and error handling](#testing-and-error-handling)
     - [file organization](#file-organization)
     - [writing tests](#writing-tests)
+  - [Structured Logging](#structured-logging)
+    - [standard log package](#standard-log-package)
+    - [slog package](#slog-package)
 
 ## Project Structure
 - use the following command to initialize a Go project:
@@ -810,3 +813,112 @@
                 fmt.Println(sum)
                 // Output: 6
             }
+
+## Structured Logging
+### standard log package
+- provides functions for logging
+  - `log.Println`: by default, logs date and time along with the string argument
+  - `log.Default()` returns the default logger object which you can then work with
+  - `log.New(outWriter, prefix, flag)` creates 
+    - loggers can have their output writer changed using `.SetWriter(w)` 
+- example working with default logger:
+
+        logger := log.Default()
+        logger.SetOutput(os.Stderr)
+        logger.Println("Order submited")
+
+        //Output: 2026/4/8 11:54:31 Order submitted
+
+        myLogger := log.New(
+            os.Stderr,
+            "Ordering System: ",
+            log.Ldate|log.Ltime|log.Lshortfile
+        )
+        myLogger.Println("Order submitted")
+
+        //Output: 2026/4/8 11:54:31 Order submitted main.go:14
+
+- the basic `log` package only dumps text; no structured logging for help with organization or machine-readable logs 
+
+### slog package
+- has built in **log levels** 
+  - `slog.Debug("")`
+  - `slog.Info("")` (default log level)
+  - `slog.Error("")` 
+- slog calls (Debug, Info, Error) can be passed additional arguments to be logged as key-value pairs
+  - this can be done just by adding arguments OR by creating **attributes**: 
+
+        slog.Info(
+            "Order submitted",
+            slog.String("name", "johndoe")
+            slog.Int("id", rand.Intn(50))
+        )
+
+- slog **groups** can be used to imitate nested json:
+  
+        userGroup := slog.Group(
+            "user",
+            "id", rand.Intn(50),
+            "username", "johndoe"
+        )
+
+        slog.Info("Order submitted", userGroup)
+
+  - in logfmt (text format), this introduces dot notation: users.name="johndoe"
+
+- you can create a custom logger using `slog.New(slog.Handler)` which allows you to configure the logger
+  - `slog.Handler` is an interface defined in the `slog` package
+  - 2 slog.Handlers are predefined:
+    - `slog.TextHandler`
+      - created with `h := slog.NewTextHandler(writer, *slog.HandlerOptions)`
+
+            slogger := slog.New(
+                slog.NewTextHandler(os.Stdout, nil)
+            )
+            slog.SetDefault(slogger)
+
+      - by default uses logfmt, which is key-value pairs in a single line
+    - `slog.JSONHandler`
+      - takes same inputs as TextHandler, but outputs text in json format
+
+            jSlogger := slog.New(slog.NewJSONHandler(
+                os.Stdout,
+                &slog.HandlerOptions{
+                    Level: slog.LevelDebug,
+                    AddSource: true,
+                },
+            ))
+
+- **child loggers** (more aptly called ) can be used to repeat output parts
+- these are added to an existing logger using the `*logger.With(...attributes)` method
+
+        getRequestGroup := slog.Group(
+            "Request",
+            slog.String("type", "GET"),
+        )
+
+        getRequestSlogger := slogger.With(getRequestGroup)
+
+        getRequestSlogger.Info("Error occurred")
+        //Output: 2026/4/8 18:54:31 level=INFO msg="Error occurred" Request.type=GET
+
+- **logging to a file** *is being skipped for now, but is included in this video: https://youtu.be/ptoKy-COIlE?si=8utXlXEAcXdtWWkw*
+
+- using the **LogValuer** interface allows us to redact or edit the *logged* value of something
+  - the interface requires one method: `LogValue() slog.Value`
+- when using (is it always?) with a struct, simply implement a receiver method 
+
+        type User struct {
+            Id: int          `json:"id"`
+            Username: string `json:"username"`
+            Password: string `json:"password"
+        }
+
+        func (u *User) LogValue() slog.Value {
+            return fmt.Sprintf("ID: %d, username: %s", u.ID, u.Username)
+        }
+
+        exampleUser := &User{44, "johndoe", "johnpass"}
+        
+        slogger.Info("Request submitted", "user", exampleUser)
+        // Output: 2026/4/8 18:54:31 level=INFO msg="Request submitted" user=ID: 44, username: johndoe
